@@ -33,6 +33,19 @@ export const GlobalStyles = ({ colors }: Props) => {
             overflow: hidden;
           }
 
+          ul {
+            margin: 0;
+            padding: 0;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+          }
+
+          form {
+            display: flex;
+            flex-direction: column;
+          }
+
           html body #__next {
             padding: 0;
             margin: 0;

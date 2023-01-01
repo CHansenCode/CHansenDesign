@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 type Props = {
-  type?: String;
+  type?: string;
+  text?: string;
   children?: React.ReactNode;
 };
 
@@ -10,10 +11,22 @@ export const Button = ({ ...props }: Props) => {
 
   return (
     <>
-      <div>
-        <h4>My Layout</h4>
-        {props.children}
-      </div>
+      <button className="pc5b">{props.text}</button>
+
+      <style jsx>
+        {`
+          button {
+            background: transparent;
+
+            padding: 0;
+            margin: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        `}
+      </style>
     </>
   );
 };

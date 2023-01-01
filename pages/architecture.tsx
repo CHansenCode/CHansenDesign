@@ -1,7 +1,7 @@
-export default function IndexPage() {
+export default function ArchitecturePage() {
   return (
     <>
-      <section>Landing Page</section>
+      <section>Architecture Page</section>
 
       <style jsx>{`
         section {
