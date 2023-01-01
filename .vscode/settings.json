@@ -1,0 +1,31 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "workbench.colorCustomizations": {
+    "editor.foldBackground": "#ffffff00",
+    "editor.selectionBackground": "#00f7ff23",
+    "editor.lineHighlightBackground": "#ffffff00",
+    "editor.lineHighlightBorder": "#00f7ff07",
+    "editorLineNumber.foreground": "#ffffff0c",
+    "editorIndentGuide.activeBackground": "#696969",
+    "editorIndentGuide.background": "#3a3a3a07"
+  },
+
+  "files.exclude": {
+    "**/.next": false,
+    "**/.github": false,
+    "**/.git": false,
+    "**/.gitignore": false,
+    "**/node_modules": false,
+    "**/LICENSE": false,
+
+    "**/next-auth.d.ts": false,
+    "**/next-env.d.ts": false,
+    "**/process.d.ts": false,
+
+    //  root files
+    "**/tsconfig.json": false,
+    "**/package.json": false,
+    "**/package-lock.json": false
+  }
+}
