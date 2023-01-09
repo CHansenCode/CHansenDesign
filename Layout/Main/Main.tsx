@@ -1,23 +1,22 @@
 export const Main = ({ children, loggedIn, ...props }: Props) => {
   return (
     <>
-      <main className="pc3b">{children}</main>
+      <main>{children}</main>
 
       <style jsx>
         {`
           main {
             position: relative;
 
-            width: 100vw;
-            max-width: 1200px;
+            width: calc(100vw - 10rem);
 
             min-height: 100vh;
 
-            padding-left: 12rem;
-
-            margin: 0 auto;
+            margin-left: 10rem;
 
             overflow-x: hidden;
+
+            transition: 0.2s ease;
           }
         `}
       </style>
@@ -26,6 +25,6 @@ export const Main = ({ children, loggedIn, ...props }: Props) => {
 };
 
 type Props = {
-  loggedIn: any;
+  loggedIn: boolean;
   children: React.ReactNode;
 };

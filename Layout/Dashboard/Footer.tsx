@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "../../components";
 import { signOut } from "next-auth/react";
 
-export const Footer = (props: any) => {
+export const Footer = ({ ...props }: any) => {
   return (
     <>
       <footer>
@@ -80,3 +80,5 @@ export const Footer = (props: any) => {
     </>
   );
 };
+
+type Props = {};

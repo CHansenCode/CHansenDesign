@@ -1,14 +1,14 @@
+import { useState } from "react";
 import Link from "next/link";
-
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 import { Button, Logo } from "../../components";
-
 import { Footer } from "./Footer";
 
-import { NavLink } from "../Nav/NavLink";
+export const Dashboard = ({ ...props }: Props) => {
+  const [state, setState] = useState({ showDash: true });
+  const { pathname } = useRouter();
 
-export const Dashboard = (props: any) => {
   return (
     <>
       <nav className="pc1b">
@@ -21,12 +21,18 @@ export const Dashboard = (props: any) => {
         <ul className="pc1b">
           {links.map((a, i) => (
             <Link key={`${a.as}${i}`} href={a.href}>
-              <Button text={a.as} height="2rem" width="100%" border="none" />
+              <Button
+                text={a.as}
+                active={pathname.startsWith(a.href)}
+                height="2rem"
+                width="100%"
+                border="none"
+              />
             </Link>
           ))}
         </ul>
 
-        <Footer />
+        <Footer {...props} />
       </nav>
 
       <style jsx>
@@ -36,7 +42,7 @@ export const Dashboard = (props: any) => {
             top: 0;
             left: 0;
             height: 100vh;
-            width: 12rem;
+            width: 10rem;
 
             margin: 0;
             padding: 0;
@@ -76,24 +82,51 @@ export const Dashboard = (props: any) => {
   );
 };
 
+type Props = {
+  colors: object;
+  setColors: Function;
+};
+
 const links = [
   {
+    cat: "edit",
+    as: "users",
+    href: "/users",
+  },
+  {
+    cat: "edit",
+    as: "slides",
+    href: "/slides",
+  },
+  {
+    cat: "edit",
+    as: "cv",
+    href: "/cv",
+  },
+
+  {
+    cat: "page",
     as: "Architecture",
     href: "/architecture",
   },
   {
+    cat: "page",
     as: "Webdesign",
     href: "/webdesign",
   },
   {
+    cat: "page",
     as: "About",
     href: "/about",
   },
+
   {
+    cat: "pres",
     as: "cs",
     href: "/presentation/cv",
   },
   {
+    cat: "pres",
     as: "slides",
     href: "/presentation/slides",
   },

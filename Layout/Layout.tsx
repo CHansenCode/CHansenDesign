@@ -24,7 +24,7 @@ const Layout = ({ children, ...props }: Props) => {
 
       {loggedIn ? <Dashboard colors={colors} setColors={setColors} /> : <Nav />}
 
-      <Main loggedIn={loggedIn}>{children}</Main>
+      <Main loggedIn={loggedIn ? true : false}>{children}</Main>
     </>
   );
 };
