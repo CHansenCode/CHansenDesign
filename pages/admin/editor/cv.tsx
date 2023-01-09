@@ -1,16 +1,12 @@
 import Link from "next/link";
-import { Button } from "../../components";
+import { Button } from "../../../components";
 
 export default function CvEditor() {
   return (
     <>
       <section>
         <div>
-          <h4>This page could not be found</h4>
-
-          <Link href="/">
-            <Button text="BACK TO HOMEPAGE" />
-          </Link>
+          <h4>CV editor</h4>
         </div>
       </section>
 

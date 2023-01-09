@@ -18,19 +18,59 @@ export const Dashboard = ({ ...props }: Props) => {
           </Link>
         </header>
 
-        <ul className="pc1b">
-          {links.map((a, i) => (
-            <Link key={`${a.as}${i}`} href={a.href}>
-              <Button
-                text={a.as}
-                active={pathname.startsWith(a.href)}
-                height="2rem"
-                width="100%"
-                border="none"
-              />
-            </Link>
-          ))}
-        </ul>
+        <div>
+          <ul className="pc1b">
+            <h4>Editors</h4>
+            {links.map(
+              (a, i) =>
+                a.cat === "edit" && (
+                  <Link key={`${a.as}${i}`} href={a.href}>
+                    <Button
+                      text={a.as}
+                      active={pathname.startsWith(a.href)}
+                      height="2rem"
+                      width="100%"
+                      border="none"
+                    />
+                  </Link>
+                )
+            )}
+          </ul>
+          <ul className="pc1b">
+            <h4>Viewers</h4>
+            {links.map(
+              (a, i) =>
+                a.cat === "pres" && (
+                  <Link key={`${a.as}${i}`} href={a.href}>
+                    <Button
+                      text={a.as}
+                      active={pathname.startsWith(a.href)}
+                      height="2rem"
+                      width="100%"
+                      border="none"
+                    />
+                  </Link>
+                )
+            )}
+          </ul>
+          <ul className="pc1b">
+            <h4>Pages</h4>
+            {links.map(
+              (a, i) =>
+                a.cat === "page" && (
+                  <Link key={`${a.as}${i}`} href={a.href}>
+                    <Button
+                      text={a.as}
+                      active={pathname.startsWith(a.href)}
+                      height="2rem"
+                      width="100%"
+                      border="none"
+                    />
+                  </Link>
+                )
+            )}
+          </ul>
+        </div>
 
         <Footer {...props} />
       </nav>
@@ -91,17 +131,28 @@ const links = [
   {
     cat: "edit",
     as: "users",
-    href: "/users",
+    href: "/admin/editor/users",
   },
   {
     cat: "edit",
     as: "slides",
-    href: "/slides",
+    href: "/admin/editor/slides",
   },
   {
     cat: "edit",
     as: "cv",
-    href: "/cv",
+    href: "/admin/editor/cv",
+  },
+
+  {
+    cat: "pres",
+    as: "CV",
+    href: "/presentation/cv",
+  },
+  {
+    cat: "pres",
+    as: "slides",
+    href: "/presentation/slides",
   },
 
   {
@@ -118,16 +169,5 @@ const links = [
     cat: "page",
     as: "About",
     href: "/about",
-  },
-
-  {
-    cat: "pres",
-    as: "cs",
-    href: "/presentation/cv",
-  },
-  {
-    cat: "pres",
-    as: "slides",
-    href: "/presentation/slides",
   },
 ];

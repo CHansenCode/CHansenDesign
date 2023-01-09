@@ -21,7 +21,7 @@
     "**/.next": true,
     "**/.github": true,
     "**/.git": true,
-    "**/.gitignore": true,
+    "**/.gitignore": false,
     "**/node_modules": true,
     "**/LICENSE": true,
 
