@@ -21,31 +21,17 @@ export const GlobalStyles = ({ colors }: Props) => {
           html {
             color: rgb(${colors.pc});
             background: rgb(${colors.bg});
-          }
 
+            font-family: poppins, sans-serif;
+          }
           html * {
             box-sizing: border-box;
           }
-
           html body {
             padding: 0;
             margin: 0;
             overflow: hidden;
           }
-
-          ul {
-            margin: 0;
-            padding: 0;
-
-            overflow-y: auto;
-            overflow-x: hidden;
-          }
-
-          form {
-            display: flex;
-            flex-direction: column;
-          }
-
           html body #__next {
             padding: 0;
             margin: 0;
@@ -53,14 +39,82 @@ export const GlobalStyles = ({ colors }: Props) => {
           }
         `}
       </style>
-
+      <Fonts colors={colors} />
+      <Transitions colors={colors} />
+      <Elements colors={colors} />
       <PrimaryAndSecondary colors={colors} />
       <SupportiveColors colors={colors} />
-      <ScrollBar />
+      <ScrollBar colors={colors} />
     </>
   );
 };
+const Fonts = ({ colors }: Props) => {
+  return (
+    <style jsx global>
+      {`
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        button {
+          font-family: poppins, sans-serif;
+          color: ${colors.pc};
+        }
+      `}
+    </style>
+  );
+};
+const Elements = ({ colors }: Props) => {
+  return (
+    <style jsx global>
+      {`
+        ul {
+          margin: 0;
+          padding: 0;
 
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+        form {
+          display: flex;
+          flex-direction: column;
+        }
+        a {
+          text-decoration: none !important;
+        }
+        a,
+        button {
+        }
+        a:hover {
+          cursor: pointer;
+        }
+        button:hover {
+          cursor: pointer;
+        }
+      `}
+    </style>
+  );
+};
+const Transitions = ({ colors }: Props) => {
+  return (
+    <style jsx global>
+      {`
+        a,
+        button,
+        li {
+          transition: 0.2s ease;
+        }
+        a:hover,
+        button:hover {
+          cursor: pointer;
+        }
+      `}
+    </style>
+  );
+};
 const PrimaryAndSecondary = ({ colors }: Props) => {
   return (
     <style jsx global>
@@ -203,7 +257,6 @@ const PrimaryAndSecondary = ({ colors }: Props) => {
     </style>
   );
 };
-
 const SupportiveColors = ({ colors }: Props) => {
   return (
     <style jsx global>
@@ -313,13 +366,11 @@ const SupportiveColors = ({ colors }: Props) => {
         .alert-b7 {
           border: thin solid rgba(${colors.alert}, 0.7);
         }
-        //#endregion
       `}
     </style>
   );
 };
-
-const ScrollBar = () => {
+const ScrollBar = ({ colors }: Props) => {
   return (
     <style jsx global>
       {`

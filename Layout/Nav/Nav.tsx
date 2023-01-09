@@ -86,4 +86,8 @@ const links = [
     as: "About",
     href: "/about",
   },
+  {
+    as: "Admin",
+    href: "/admin",
+  },
 ];

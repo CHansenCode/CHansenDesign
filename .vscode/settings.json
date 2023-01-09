@@ -30,13 +30,13 @@
     "**/process.d.ts": true,
 
     //  root files
-    "**/tsconfig.json": true,
+    "**/tsconfig.json": false,
     "**/package.json": true,
     "**/package-lock.json": true,
 
     // stuff
-    "**/api-lib": true,
-    "**/lib": true,
-    "**/types": true
+    "**/api-lib": false,
+    "**/lib": false,
+    "**/types": false
   }
 }

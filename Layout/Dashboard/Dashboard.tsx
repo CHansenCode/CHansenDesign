@@ -1,6 +1,11 @@
 import Link from "next/link";
 
-import { Logo } from "../../components";
+import { signIn, signOut, useSession } from "next-auth/react";
+
+import { Button, Logo } from "../../components";
+
+import { Footer } from "./Footer";
+
 import { NavLink } from "../Nav/NavLink";
 
 export const Dashboard = (props: any) => {
@@ -16,14 +21,12 @@ export const Dashboard = (props: any) => {
         <ul className="pc1b">
           {links.map((a, i) => (
             <Link key={`${a.as}${i}`} href={a.href}>
-              <NavLink text={a.as} />
+              <Button text={a.as} height="2rem" width="100%" border="none" />
             </Link>
           ))}
         </ul>
 
-        <footer>
-          <button>askdjkas</button>
-        </footer>
+        <Footer />
       </nav>
 
       <style jsx>
@@ -58,8 +61,7 @@ export const Dashboard = (props: any) => {
 
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
+            gap: 0.25rem;
           }
 
           main {
@@ -86,5 +88,13 @@ const links = [
   {
     as: "About",
     href: "/about",
+  },
+  {
+    as: "cs",
+    href: "/presentation/cv",
+  },
+  {
+    as: "slides",
+    href: "/presentation/slides",
   },
 ];
