@@ -1,16 +1,11 @@
 import Link from "next/link";
-import { Button } from "../../components";
 
 export default function SlidesEditor() {
   return (
     <>
       <section>
         <div>
-          <h4>This page could not be found</h4>
-
-          <Link href="/">
-            <Button text="BACK TO HOMEPAGE" />
-          </Link>
+          <h4>Slides editor</h4>
         </div>
       </section>
 
