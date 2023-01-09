@@ -20,7 +20,10 @@ async function checkEmail(mail: string) {
 }
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
+
   adapter: MongoDBAdapter(clientPromise),
+
   providers: [
     // GithubProvider({
     //   clientId: process.env.GITHUB_ID,
