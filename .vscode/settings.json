@@ -15,13 +15,13 @@
     "**/.env.local": false,
     "**/.env.local.EXAMPLE": true,
 
-    "**/middleware.ts": false,
+    "**/middleware.ts": true,
     "**/README.md": true,
 
     "**/.next": true,
     "**/.github": true,
     "**/.git": true,
-    "**/.gitignore": false,
+    "**/.gitignore": true,
     "**/node_modules": true,
     "**/LICENSE": true,
 
@@ -30,13 +30,13 @@
     "**/process.d.ts": true,
 
     //  root files
-    "**/tsconfig.json": false,
+    "**/tsconfig.json": true,
     "**/package.json": true,
     "**/package-lock.json": true,
 
     // stuff
     "**/api-lib": false,
     "**/lib": false,
-    "**/types": false
+    "**/types": true
   }
 }

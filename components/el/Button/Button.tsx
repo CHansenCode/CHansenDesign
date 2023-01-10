@@ -6,7 +6,10 @@ export const Button = ({ type, active, ...props }: Props) => {
 
   return (
     <>
-      <button className={`${active ? "sc sc5b" : "pc pc3b"}`}>
+      <button
+        className={`${active ? "sc sc5b" : "pc pc3b"}`}
+        onClick={(e) => (props.onClick ? props.onClick : null)}
+      >
         {type && <IconSwitch type={type} />}
 
         {props.text}
@@ -29,6 +32,9 @@ export const Button = ({ type, active, ...props }: Props) => {
 
             border: ${props.border};
 
+            font-size: ${props.fontSize};
+            letter-spacing: ${props.letterSpacing};
+
             display: flex;
             align-items: center;
             justify-content: center;
@@ -37,7 +43,7 @@ export const Button = ({ type, active, ...props }: Props) => {
           }
           button:hover {
             cursor: pointer;
-            box-shadow: inset 0 0 1rem -0.5rem;
+            box-shadow: inset 0 0 1rem -0.6rem;
           }
         `}
       </style>
@@ -46,9 +52,11 @@ export const Button = ({ type, active, ...props }: Props) => {
 };
 
 type Props = {
+  onClick?: Function;
+  children?: React.ReactNode;
+
   type?: string;
   text?: string;
-  children?: React.ReactNode;
   active?: boolean;
 
   height?: string;
@@ -56,4 +64,6 @@ type Props = {
   margin?: string;
   padding?: string;
   border?: string;
+  fontSize?: string;
+  letterSpacing?: string;
 };

@@ -1,78 +1,91 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 import { Button, Logo } from "../../components";
 import { Footer } from "./Footer";
 
 export const Dashboard = ({ ...props }: Props) => {
-  const [state, setState] = useState({ showDash: true });
   const { pathname } = useRouter();
+
+  const visible: boolean = useSelector(
+    (s: { global: { showDash: boolean } }) => s.global.showDash
+  );
 
   return (
     <>
       <nav className="pc1b">
         <header>
           <Link href={"/"}>
-            <Logo height="80px" />
+            <Logo height="70px" />
           </Link>
         </header>
 
         <div>
-          <ul className="pc1b">
-            <h4>Editors</h4>
+          <ul>
+            <p className="sc">Editors</p>
+
             {links.map(
               (a, i) =>
                 a.cat === "edit" && (
                   <Link key={`${a.as}${i}`} href={a.href}>
                     <Button
-                      text={a.as}
                       active={pathname.startsWith(a.href)}
-                      height="2rem"
+                      height="1.15rem"
                       width="100%"
                       border="none"
-                    />
+                      padding="0"
+                    >
+                      <h6>{a.as}</h6>
+                    </Button>
                   </Link>
                 )
             )}
           </ul>
-          <ul className="pc1b">
-            <h4>Viewers</h4>
+          <ul>
+            <p className="sc">Viewers</p>
+
             {links.map(
               (a, i) =>
                 a.cat === "pres" && (
                   <Link key={`${a.as}${i}`} href={a.href}>
                     <Button
-                      text={a.as}
                       active={pathname.startsWith(a.href)}
-                      height="2rem"
+                      height="1.15rem"
                       width="100%"
                       border="none"
-                    />
+                      padding="0"
+                    >
+                      <h6>{a.as}</h6>
+                    </Button>
                   </Link>
                 )
             )}
           </ul>
-          <ul className="pc1b">
-            <h4>Pages</h4>
+          <ul>
+            <p className="sc">Pages</p>
+
             {links.map(
               (a, i) =>
                 a.cat === "page" && (
                   <Link key={`${a.as}${i}`} href={a.href}>
                     <Button
-                      text={a.as}
                       active={pathname.startsWith(a.href)}
-                      height="2rem"
+                      height="1.15rem"
                       width="100%"
                       border="none"
-                    />
+                      padding="0"
+                    >
+                      <h6>{a.as}</h6>
+                    </Button>
                   </Link>
                 )
             )}
           </ul>
         </div>
 
-        <Footer {...props} />
+        <Footer visible={visible} {...props} />
       </nav>
 
       <style jsx>
@@ -80,7 +93,7 @@ export const Dashboard = ({ ...props }: Props) => {
           nav {
             position: fixed;
             top: 0;
-            left: 0;
+            left: ${visible ? "0rem" : "-10rem"};
             height: 100vh;
             width: 10rem;
 
@@ -92,29 +105,39 @@ export const Dashboard = ({ ...props }: Props) => {
             display: grid;
             grid-template-rows: auto 1fr auto;
             gap: 1rem;
+
+            transition: 0.3s ease;
           }
 
           header {
+            width: 100%;
             padding-top: 2rem;
 
             display: flex;
             align-items: center;
             justify-content: center;
-          }
 
+            overflow: hidden;
+          }
+          nav > div {
+            padding: 0 1rem;
+          }
           ul {
-            padding: 2rem 0;
-
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
+            margin-bottom: 1rem;
           }
-
-          main {
-            height: 100%;
-
-            overflow-x: hidden;
-            overflow-y: auto;
+          ul > p {
+            padding-left: 1rem;
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.5px;
+          }
+          h6 {
+            text-align: left;
+            width: 5rem;
+            margin: 0;
+            font-size: 11px;
+            text-transform: uppercase;
           }
         `}
       </style>

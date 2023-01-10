@@ -20,6 +20,8 @@ import {
   AiOutlineArrowDown,
   AiOutlineCustomerService,
   AiOutlineUnorderedList,
+  AiOutlineCalendar,
+  AiOutlineWechat,
 } from "react-icons/ai";
 
 import {
@@ -29,8 +31,9 @@ import {
   BsMap,
   BsTruck,
 } from "react-icons/bs";
+
 import { BiTransferAlt } from "react-icons/bi";
-import { GiPistolGun } from "react-icons/gi";
+import { GiPistolGun, GiYinYang } from "react-icons/gi";
 
 export const IconSwitch = ({ type }: Props) => {
   switch (type) {
@@ -86,6 +89,12 @@ export const IconSwitch = ({ type }: Props) => {
       return <BsTruck />;
     case "trouble":
       return <GiPistolGun />;
+    case "yinyang":
+      return <GiYinYang />;
+    case "calendar":
+      return <AiOutlineCalendar />;
+    case "chat":
+      return <AiOutlineWechat />;
 
     default:
       return <></>;
