@@ -1,4 +1,17 @@
-export default function SlidesEditor() {
+import { useAppSelector } from "../../../redux/hooks";
+import {
+  showDash,
+  hideDash,
+  toggleDash,
+} from "../../../redux/reducers/globalState";
+
+import { useSelector } from "react-redux";
+
+export default function UsersEditor() {
+  const store = useSelector((s) => s);
+
+  console.log(store);
+
   return (
     <>
       <section>

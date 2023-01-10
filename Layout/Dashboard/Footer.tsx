@@ -1,79 +1,125 @@
+import { useAppDispatch } from "../../redux/hooks";
+import { toggleDash } from "../../redux/reducers/globalState";
 import Link from "next/link";
 
 import { Button } from "../../components";
+import { ToggleVisible } from "./ToggleVisible";
+
 import { signOut } from "next-auth/react";
+import { store } from "../../redux/store";
 
 export const Footer = ({ ...props }: any) => {
+  const dispatch = useAppDispatch();
+
   return (
     <>
-      <footer>
-        <div>
+      <section>
+        <header>
+          <div>
+            <Button type="yinyang" height="100%" width="100%" border="none" />
+          </div>
           <div></div>
           <div></div>
           <div></div>
-          <div></div>
-        </div>
+        </header>
 
-        <div className="mid">
-          <div>
+        <main className="mid pc3b">
+          <div className="pc3b">
             <Link href="/">
               <Button type="home" height="100%" width="100%" border="none" />
             </Link>
           </div>
-          <div>
-            <Link href="/">
-              <Button type="home" height="100%" width="100%" border="none" />
+          <div className="pc3b">
+            <Link href="/userSettings">
+              <Button
+                type="settings"
+                height="100%"
+                width="100%"
+                border="none"
+              />
+            </Link>
+          </div>
+          <div className="pc3b">
+            <Link href="/calendar">
+              <Button
+                type="calendar"
+                height="100%"
+                width="100%"
+                border="none"
+              />
             </Link>
           </div>
           <div>
-            <Link href="/">
-              <Button type="home" height="100%" width="100%" border="none" />
+            <Link href="/chat">
+              <Button type="chat" height="100%" width="100%" border="none" />
             </Link>
           </div>
-          <div>
-            <Link href="/">
-              <Button type="home" height="100%" width="100%" border="none" />
-            </Link>
-          </div>
-        </div>
+        </main>
 
-        <div>
-          <a
-            href={`/api/auth/signout`}
-            onClick={(e) => {
-              e.preventDefault();
-              signOut();
-            }}
-          >
-            <button>log out</button>
-          </a>
+        <footer className="pc3b">
+          <div className="pc3b">
+            <a
+              href={`/api/auth/signout`}
+              onClick={(e) => {
+                e.preventDefault();
+                signOut();
+              }}
+            >
+              <Button
+                text="LOG OUT"
+                fontSize="11px"
+                letterSpacing="1px"
+                height="100%"
+                width="100%"
+                border="none"
+              />
+            </a>
+          </div>
 
-          <button></button>
-        </div>
-      </footer>
+          <ToggleVisible
+            active={props.visible}
+            onClick={() => dispatch(toggleDash())}
+          />
+        </footer>
+      </section>
 
       <style jsx>
         {`
-          footer {
+          section {
             height: 6rem;
-          }
-          footer > div {
-            border-top: thin solid;
-          }
-          div {
-            height: 2rem;
             width: 100%;
           }
-          .mid {
+          header,
+          main,
+          footer {
             height: 2rem;
-
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+          }
+          header,
+          main {
+            height: 2rem;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             align-items: center;
           }
-          .mid > * {
+          header > *,
+          main > * {
             height: 100%;
             width: 100%;
+            border-left: none;
+            border-top: none;
+            border-bottom: none;
+          }
+          footer {
+            display: grid;
+            grid-template-columns: 6rem 1fr;
+          }
+          footer > div {
+            border-top: none;
+            border-bottom: none;
+            border-left: none;
           }
         `}
       </style>
@@ -81,4 +127,6 @@ export const Footer = ({ ...props }: any) => {
   );
 };
 
-type Props = {};
+type Props = {
+  visible: boolean;
+};
