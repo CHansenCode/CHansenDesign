@@ -2,12 +2,7 @@ import React from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 
-import { Logo } from "../../components";
-import { NavLink } from "./NavLink";
-
-type Props = {
-  children?: React.ReactNode;
-};
+import { Logo, Button } from "../../components";
 
 export const Nav = ({ ...props }: Props) => {
   const {} = props;
@@ -22,10 +17,20 @@ export const Nav = ({ ...props }: Props) => {
         <ul className="pc1b">
           {links.map((a, i) => (
             <Link key={`${a.as}${i}`} href={a.href}>
-              <NavLink text={a.as} />
+              <Button text={a.as} />
             </Link>
           ))}
         </ul>
+
+        {/* <a
+          href={`/api/auth/signin`}
+          onClick={(e) => {
+            e.preventDefault();
+            signIn();
+          }}
+        >
+          Sign in?
+        </a> */}
 
         <a
           href={`/api/auth/signin`}
@@ -34,7 +39,7 @@ export const Nav = ({ ...props }: Props) => {
             signIn();
           }}
         >
-          Sign in
+          <Button type="signin" height="100%" width="100%" border="none" />
         </a>
       </nav>
 
@@ -91,3 +96,7 @@ const links = [
     href: "/admin",
   },
 ];
+
+type Props = {
+  children?: React.ReactNode;
+};

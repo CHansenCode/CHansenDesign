@@ -20,6 +20,7 @@ import {
   AiOutlineArrowDown,
   AiOutlineCustomerService,
   AiOutlineUnorderedList,
+  AiOutlineKey,
 } from "react-icons/ai";
 
 import {
@@ -86,7 +87,8 @@ export const IconSwitch = ({ type }: Props) => {
       return <BsTruck />;
     case "trouble":
       return <GiPistolGun />;
-
+    case "signin":
+      return <AiOutlineKey />;
     default:
       return <></>;
   }
