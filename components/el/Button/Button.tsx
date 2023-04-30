@@ -8,7 +8,8 @@ export const Button = ({ type, active, ...props }: Props) => {
     <>
       <button
         className={`${active ? "sc sc5b" : "pc pc3b"}`}
-        onClick={(e) => (props.onClick ? props.onClick : null)}
+        onClick={props.onClick ? props.onClick : null}
+        style={props.style}
       >
         {type && <IconSwitch type={type} />}
 
@@ -52,8 +53,9 @@ export const Button = ({ type, active, ...props }: Props) => {
 };
 
 type Props = {
-  onClick?: Function;
+  onClick?: any;
   children?: React.ReactNode;
+  style?: any;
 
   type?: string;
   text?: string;

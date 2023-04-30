@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { Button } from "../../components";
 
-export default function SlidesEditor() {
+export default function CvEditor() {
   return (
     <>
       <section>
         <div>
-          <h4>Slides editor</h4>
+          <h4>CV editor</h4>
         </div>
       </section>
 

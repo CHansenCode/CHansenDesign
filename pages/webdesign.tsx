@@ -1,7 +1,7 @@
 export default function WebdesignPage() {
   return (
     <>
-      <section>Architecture Page</section>
+      <section>Webdesign Page</section>
 
       <style jsx>{`
         section {

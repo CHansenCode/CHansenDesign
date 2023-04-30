@@ -15,7 +15,7 @@
     "**/.env.local": false,
     "**/.env.local.EXAMPLE": true,
 
-    "**/middleware.ts": true,
+    "**/middleware.ts": false,
     "**/README.md": true,
 
     "**/.next": true,
@@ -37,6 +37,8 @@
     // stuff
     "**/api-lib": false,
     "**/lib": false,
-    "**/types": true
+    "**/types": true,
+    "**/public": true,
+    "**/examples": true
   }
 }

@@ -5,18 +5,30 @@ import Link from "next/link";
 import { Button } from "../../components";
 import { ToggleVisible } from "./ToggleVisible";
 
+import { NavLink } from "./NavLink";
+
 import { signOut } from "next-auth/react";
 import { store } from "../../redux/store";
 
 export const Footer = ({ ...props }: any) => {
   const dispatch = useAppDispatch();
 
+  async function toggleLight() {
+    props.setColors({ ...props.colors, darkmode: !props.colors.darkmode });
+  }
+
   return (
     <>
       <section>
         <header>
           <div>
-            <Button type="yinyang" height="100%" width="100%" border="none" />
+            <Button
+              type="yinyang"
+              height="100%"
+              width="100%"
+              border="none"
+              onClick={() => toggleLight()}
+            />
           </div>
           <div></div>
           <div></div>
@@ -30,7 +42,7 @@ export const Footer = ({ ...props }: any) => {
             </Link>
           </div>
           <div className="pc3b">
-            <Link href="/userSettings">
+            <Link href="/dashboard/settings">
               <Button
                 type="settings"
                 height="100%"
@@ -40,7 +52,7 @@ export const Footer = ({ ...props }: any) => {
             </Link>
           </div>
           <div className="pc3b">
-            <Link href="/calendar">
+            <Link href="/dashboard/calendar">
               <Button
                 type="calendar"
                 height="100%"
@@ -50,7 +62,7 @@ export const Footer = ({ ...props }: any) => {
             </Link>
           </div>
           <div>
-            <Link href="/chat">
+            <Link href="/dashboard/chat">
               <Button type="chat" height="100%" width="100%" border="none" />
             </Link>
           </div>

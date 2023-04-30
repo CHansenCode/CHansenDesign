@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-export const Example = ({ ...props }: Props) => {
-  const { data } = props;
+export const Edit = ({ ...props }) => {
+  //
 
   props = {
     ...props,
@@ -9,19 +9,14 @@ export const Example = ({ ...props }: Props) => {
 
   return (
     <>
-      <div>{props.children}</div>
+      <section {...props}>{props.children}</section>
 
       <style jsx>
         {`
-          div {
+          section {
           }
         `}
       </style>
     </>
   );
-};
-
-type Props = {
-  data: {};
-  children?: React.ReactNode;
 };
