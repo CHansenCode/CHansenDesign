@@ -1,20 +1,25 @@
-import { useAppSelector } from "../../../redux/hooks";
-import {
-  showDash,
-  hideDash,
-  toggleDash,
-} from "../../../redux/reducers/globalState";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
-import { useSelector } from "react-redux";
+import { fetchUsers } from "../../redux/reducers/users";
 
 export default function UsersEditor() {
-  const store = useSelector((s) => s);
+  const dispatch = useAppDispatch();
+
+  const store = useAppSelector((s) => s);
+  const usersStatus = useAppSelector((s) => s.users.status);
+
+  useEffect(() => {
+    if (usersStatus === "idle") {
+      dispatch(fetchUsers());
+    }
+  }, [usersStatus, dispatch]); //eslint-disable-line
 
   console.log(store);
 
   return (
     <>
-      <section>
+      <section onClick={() => console.log(store)}>
         <div>
           <h4>Users</h4>
         </div>

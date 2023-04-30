@@ -6,9 +6,21 @@ import clientPromise from "../../../lib/mongodb";
 import GoogleProvider from "next-auth/providers/google";
 
 async function checkEmail(mail: string) {
-  const split = mail.split("@");
+  const pre: string | undefined = process.env.ALLOWED_EMAIL_NAME;
+  const suf: string | undefined = process.env.ALLOWED_EMAIL_PROVIDER;
 
-  return true;
+  let preSplit = pre?.split(",");
+  let sufSplit = suf?.split(",");
+  let mailSplit = mail.split("@");
+
+  let preFind = preSplit?.find((a) => a === mailSplit[0]);
+  let sufFind = sufSplit?.find((a) => a === mailSplit[1]);
+
+  if (preFind && sufFind) {
+    return true;
+  }
+
+  return false;
 }
 
 export const authOptions: NextAuthOptions = {

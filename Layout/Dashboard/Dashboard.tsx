@@ -1,17 +1,12 @@
-import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
-import { Button, Logo } from "../../components";
-import { Footer } from "./Footer";
+import { Logo, Text } from "../../components";
+import { NavLink, Footer } from "./";
 
 export const Dashboard = ({ ...props }: Props) => {
-  const { pathname } = useRouter();
-
-  const visible: boolean = useSelector(
-    (s: { global: { showDash: boolean } }) => s.global.showDash
-  );
+  const store: any = useSelector((s) => s);
+  const visible: boolean = store.global.showDash;
 
   return (
     <>
@@ -24,64 +19,25 @@ export const Dashboard = ({ ...props }: Props) => {
 
         <div>
           <ul>
-            <p className="sc">Editors</p>
-
-            {links.map(
-              (a, i) =>
-                a.cat === "edit" && (
-                  <Link key={`${a.as}${i}`} href={a.href}>
-                    <Button
-                      active={pathname.startsWith(a.href)}
-                      height="1.15rem"
-                      width="100%"
-                      border="none"
-                      padding="0"
-                    >
-                      <h6>{a.as}</h6>
-                    </Button>
-                  </Link>
-                )
-            )}
+            <Text text="Admin" type="label" margin="0 0 0.5rem 0" />
+            <NavLink text="users" href="/admin/users" />
           </ul>
           <ul>
-            <p className="sc">Viewers</p>
-
-            {links.map(
-              (a, i) =>
-                a.cat === "pres" && (
-                  <Link key={`${a.as}${i}`} href={a.href}>
-                    <Button
-                      active={pathname.startsWith(a.href)}
-                      height="1.15rem"
-                      width="100%"
-                      border="none"
-                      padding="0"
-                    >
-                      <h6>{a.as}</h6>
-                    </Button>
-                  </Link>
-                )
-            )}
+            <Text text="Edit" type="label" margin="0 0 0.5rem 0" />
+            <NavLink text="slides" href="/dashboard/slides" />
+            <NavLink text="cv" href="/dashboard/cv" />
           </ul>
           <ul>
-            <p className="sc">Pages</p>
-
-            {links.map(
-              (a, i) =>
-                a.cat === "page" && (
-                  <Link key={`${a.as}${i}`} href={a.href}>
-                    <Button
-                      active={pathname.startsWith(a.href)}
-                      height="1.15rem"
-                      width="100%"
-                      border="none"
-                      padding="0"
-                    >
-                      <h6>{a.as}</h6>
-                    </Button>
-                  </Link>
-                )
-            )}
+            <Text text="View" type="label" margin="0 0 0.5rem 0" />
+            <NavLink text="slides" href="/view/slides" />
+            <NavLink text="cv" href="/view/cv" />
+          </ul>
+          <ul>
+            <Text text="Page" type="label" margin="0 0 0.5rem 0" />
+            <NavLink text="Frontpage" href="/" />
+            <NavLink text="Architecture" href="/architecture" />
+            <NavLink text="Webdesign" href="/webdesign" />
+            <NavLink text="About" href="/about" />
           </ul>
         </div>
 
@@ -92,6 +48,7 @@ export const Dashboard = ({ ...props }: Props) => {
         {`
           nav {
             position: fixed;
+            z-index: 2;
             top: 0;
             left: ${visible ? "0rem" : "-10rem"};
             height: 100vh;
@@ -104,7 +61,7 @@ export const Dashboard = ({ ...props }: Props) => {
 
             display: grid;
             grid-template-rows: auto 1fr auto;
-            gap: 1rem;
+            gap: 2rem;
 
             transition: 0.3s ease;
           }
@@ -125,20 +82,6 @@ export const Dashboard = ({ ...props }: Props) => {
           ul {
             margin-bottom: 1rem;
           }
-          ul > p {
-            padding-left: 1rem;
-            font-size: 10px;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-            letter-spacing: 0.5px;
-          }
-          h6 {
-            text-align: left;
-            width: 5rem;
-            margin: 0;
-            font-size: 11px;
-            text-transform: uppercase;
-          }
         `}
       </style>
     </>
@@ -149,48 +92,3 @@ type Props = {
   colors: object;
   setColors: Function;
 };
-
-const links = [
-  {
-    cat: "edit",
-    as: "users",
-    href: "/admin/editor/users",
-  },
-  {
-    cat: "edit",
-    as: "slides",
-    href: "/admin/editor/slides",
-  },
-  {
-    cat: "edit",
-    as: "cv",
-    href: "/admin/editor/cv",
-  },
-
-  {
-    cat: "pres",
-    as: "CV",
-    href: "/presentation/cv",
-  },
-  {
-    cat: "pres",
-    as: "slides",
-    href: "/presentation/slides",
-  },
-
-  {
-    cat: "page",
-    as: "Architecture",
-    href: "/architecture",
-  },
-  {
-    cat: "page",
-    as: "Webdesign",
-    href: "/webdesign",
-  },
-  {
-    cat: "page",
-    as: "About",
-    href: "/about",
-  },
-];

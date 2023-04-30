@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-type Props = {
-  data: {};
-  children?: React.ReactNode;
-};
-
-const Example = ({ ...props }: Props) => {
+export const Example = ({ ...props }: Props) => {
   const { data } = props;
 
   props = {
@@ -26,4 +21,7 @@ const Example = ({ ...props }: Props) => {
   );
 };
 
-export default Example;
+type Props = {
+  data: {};
+  children?: React.ReactNode;
+};

@@ -20,7 +20,8 @@
     "next-env.d.ts",
     "next-auth.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "api-lib/mongo/users.js"
   ],
   "exclude": ["node_modules"]
 }

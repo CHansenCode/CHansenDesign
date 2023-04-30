@@ -4,15 +4,36 @@ import Link from "next/link";
 
 import { Logo } from "../../components";
 import { NavLink } from "./NavLink";
+import { useRouter } from "next/router";
 
 type Props = {
   children?: React.ReactNode;
 };
 
-export const Nav = ({ ...props }: Props) => {
-  const {} = props;
+const links = [
+  {
+    as: "Architecture",
+    href: "/architecture",
+  },
+  {
+    as: "Webdesign",
+    href: "/webdesign",
+  },
+  {
+    as: "About",
+    href: "/about",
+  },
+  {
+    as: "Admin",
+    href: "/admin",
+  },
+];
 
-  return (
+export const Nav = ({ ...props }: Props) => {
+  const router = useRouter();
+  const visibleNav: boolean = valNavigationVisibilty(router.pathname);
+
+  return visibleNav ? (
     <>
       <nav className="pc05b">
         <Link href={"/"}>
@@ -70,24 +91,22 @@ export const Nav = ({ ...props }: Props) => {
         `}
       </style>
     </>
+  ) : (
+    <></>
   );
 };
 
-const links = [
-  {
-    as: "Architecture",
-    href: "/architecture",
-  },
-  {
-    as: "Webdesign",
-    href: "/webdesign",
-  },
-  {
-    as: "About",
-    href: "/about",
-  },
-  {
-    as: "Admin",
-    href: "/admin",
-  },
-];
+function valNavigationVisibilty(pathname: string) {
+  const pagesWithoutNav = ["caticorn"];
+
+  let visibleNav = true;
+
+  const pathnameSplit = pathname.split("/");
+
+  pathnameSplit.length &&
+    pathnameSplit.forEach(
+      (a) => pagesWithoutNav.find((b) => b === a) && (visibleNav = false)
+    );
+
+  return visibleNav;
+}
