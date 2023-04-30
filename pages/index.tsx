@@ -1,7 +1,14 @@
+import { useRouter } from "next/router";
+import { Button } from "../components";
+
 export default function IndexPage() {
+  const router = useRouter();
   return (
     <>
-      <section>Landing Page</section>
+      <section>
+        Landing page eh
+        <Button text="caticorn" onClick={() => router.push("/caticorn")} />
+      </section>
 
       <style jsx>{`
         section {

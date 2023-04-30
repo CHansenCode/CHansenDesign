@@ -15,8 +15,6 @@ export default function UsersEditor() {
     }
   }, [usersStatus, dispatch]); //eslint-disable-line
 
-  // const users = dispatch(getAll());
-
   console.log(store);
 
   return (

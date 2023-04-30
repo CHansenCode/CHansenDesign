@@ -24,10 +24,10 @@ export const Text = ({ ...props }: Props) => {
       return <Label {...props} />;
     case "annotation":
       return <Annotation {...props} />;
-
     case "p":
       return <Para {...props} />;
       break;
+
     default:
       return <Para {...props} />;
       break;
@@ -35,8 +35,8 @@ export const Text = ({ ...props }: Props) => {
 };
 
 type Props = {
-  type?: string;
   text: string;
+  type?: string;
   bold?: boolean;
 
   className?: string;

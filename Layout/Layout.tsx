@@ -1,9 +1,8 @@
 import { useSession } from "next-auth/react";
 
 import { Nav } from "./Nav";
-import { Dashboard } from "./Dashboard";
 import { Main } from "./Main";
-
+import { Dashboard } from "./Dashboard";
 import { GlobalStyles } from "./GlobalStyles";
 
 import { useColors } from "../lib";
