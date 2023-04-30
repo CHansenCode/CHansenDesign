@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 import { fetchUsers } from "../../redux/reducers/users";
 
 export default function UsersEditor() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const store = useSelector((s) => s);
-  const usersStatus = useSelector((s) => s.users.status);
+  const store = useAppSelector((s) => s);
+  const usersStatus = useAppSelector((s) => s.users.status);
 
   useEffect(() => {
     if (usersStatus === "idle") {
