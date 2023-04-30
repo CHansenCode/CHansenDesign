@@ -41,6 +41,8 @@ export const Button = ({ type, active, ...props }: Props) => {
             justify-content: center;
 
             transition: 0.2s ease;
+            opacity: ${props.disabled ? 0.3 : 1};
+            pointer-events: ${props.disabled ? "none" : "all"};
           }
           button:hover {
             cursor: pointer;
@@ -60,6 +62,7 @@ type Props = {
   type?: string;
   text?: string;
   active?: boolean;
+  disabled?: boolean;
 
   height?: string;
   width?: string;

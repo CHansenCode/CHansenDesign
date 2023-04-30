@@ -39,6 +39,6 @@
     "**/lib": false,
     "**/types": true,
     "**/public": true,
-    "**/examples": true
+    "**/examples": false
   }
 }
