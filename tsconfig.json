@@ -21,7 +21,8 @@
     "next-auth.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "api-lib/mongo/users.js"
+    "api-lib/mongo/users.js",
+    "next.config.js"
   ],
   "exclude": ["node_modules"]
 }

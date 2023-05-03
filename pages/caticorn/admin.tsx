@@ -20,56 +20,39 @@ const init = {
     loading: false,
   },
   form: {
-    doggies: {
-      findCat: "string",
-      squid: 0,
-      flamingo: 0,
-      train: 0,
-      bowling: 0,
-      minus: 0,
-    },
-    unicornies: {
-      findCat: 0,
-      squid: 0,
-      flamingo: 0,
-      train: 0,
-      bowling: 0,
-      minus: 0,
-    },
-    giraffies: {
-      findCat: 0,
-      squid: 0,
-      flamingo: 0,
-      train: 0,
-      bowling: 0,
-      minus: 0,
-    },
-    bunnies: {
-      findCat: 0,
-      squid: 0,
-      flamingo: 0,
-      train: 0,
-      bowling: 0,
-      minus: 0,
-    },
+    one: "",
+    two: "",
+    three: "",
+    four: "",
+    five: "",
   },
 };
 
-const team = ["wolfies", "unicornies", "deeries", "caties"];
+const team = ["its thyme"];
 
 export default function CaticornPage(props: any) {
   const dispatch = useAppDispatch();
-  const router = useRouter();
-
-  const [state, setState] = useState({ ...init.state });
-  const [form, setForm] = useState({ ...init.form });
 
   const showDash: boolean = useAppSelector((s: any) => s.global.showDash);
+
+  const router = useRouter();
+  const [state, setState] = useState({ ...init.state });
+  const [form, setForm] = useState({ ...init.form });
 
   useEffect(() => {
     showDash && dispatch(hideDash());
   }, []);
 
+  async function fetchTeamData() {
+    const { data } = await axios.get("/api/caticorn");
+
+    setForm({ ...form, ...data });
+  }
+  async function patchData(team: string, form: object) {
+    const { data } = await axios.patch(`/api/caticorn/${team}`);
+
+    setForm({ ...form, ...data });
+  }
   async function onSubmitPId(id: string) {
     router.push(`${router.pathname}/?pId=${id}`);
   }
@@ -90,6 +73,15 @@ export default function CaticornPage(props: any) {
 
     console.log(data);
   }
+  async function getTeamData(team: string) {
+    if (state.loading) {
+      return;
+    }
+
+    const { data }: any = axios.get(`/api/caticorn/${team}`);
+
+    setForm({ ...form, ...data });
+  }
 
   return props.pId && team.find((a) => a === props.pId) ? (
     <>
@@ -104,17 +96,12 @@ export default function CaticornPage(props: any) {
           <Form onSubmit={() => submitData(form, props.pId)}>
             <h4>form</h4>
 
-            <Inputs type="file" />
+            <Inputs type="image" />
 
             <Inputs
               label="answer one"
-              value={form.doggies.findCat}
-              onChange={(e: any) =>
-                setForm({
-                  ...form,
-                  doggies: { ...form.doggies, findCat: e.target.value },
-                })
-              }
+              value={form.one}
+              onChange={(e: any) => setForm({ ...form, one: e.target.value })}
             />
 
             <Inputs type="image" />
@@ -163,11 +150,7 @@ export default function CaticornPage(props: any) {
               alt="Evil caticorn"
             />
 
-            <Text
-              text="Welcome to find the caticorn, have you found your secret key yet?"
-              type="h4"
-              className="sc"
-            />
+            <Text text="Admin page" type="h4" className="sc" />
 
             <Inputs
               label="secret key"
@@ -189,8 +172,6 @@ export default function CaticornPage(props: any) {
               />
             )}
           </Form>
-
-          <Button text="init Data" onClick={() => postData(setForm)} />
         </main>
       </section>
 
@@ -231,28 +212,4 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       cookie: session,
     },
   };
-}
-
-async function fetchData(form: any, setForm: any) {
-  const res = await axios.get("/api/caticorn");
-
-  console.log(res);
-
-  setForm({ ...form, ...res.data });
-}
-
-async function postData(setForm: any) {
-  const res = await axios.post("/api/caticorn/post");
-
-  console.log(res);
-
-  setForm([...res.data]);
-}
-
-async function patchData(team: string, form: object, setForm: any) {
-  const res = await axios.patch(`/api/caticorn/${team}`);
-
-  console.log(res);
-
-  setForm({ ...form, ...res.data });
 }

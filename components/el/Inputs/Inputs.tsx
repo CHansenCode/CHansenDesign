@@ -1,6 +1,8 @@
 import { Input } from "./Input";
 import { Textarea } from "./Textarea";
 
+import { File } from "./File";
+
 export const Inputs = ({ ...props }: Props) => {
   switch (props.type) {
     case "input":
@@ -42,6 +44,19 @@ export const Inputs = ({ ...props }: Props) => {
     case "image":
       return <>Image type</>;
 
+    case "file":
+      return (
+        <File
+          myRef={props.myRef}
+          onChange={props.onChange}
+          value={props.value}
+          label={props.label}
+          info={props.info}
+          active={props.active}
+          disabled={props.disabled}
+        />
+      );
+
     default:
       return (
         <Input
@@ -62,7 +77,14 @@ type Props = {
   value?: string | number | undefined;
   myRef?: any;
 
-  type?: "input" | "textarea" | "number" | "select" | "qrScanner" | "image";
+  type?:
+    | "input"
+    | "textarea"
+    | "number"
+    | "select"
+    | "qrScanner"
+    | "image"
+    | "file";
   label?: string;
   info?: string;
 

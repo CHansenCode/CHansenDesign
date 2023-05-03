@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../redux/hooks";
 
 export const Main = ({ children, loggedIn, ...props }: Props) => {
-  const showDash: any = useSelector((s: any) => s.global.showDash);
+  const showDash: any = useAppSelector((s: any) => s.global.showDash);
 
   return (
     <>

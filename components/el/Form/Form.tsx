@@ -17,6 +17,9 @@ export const Form = ({ ...props }: Props) => {
           form {
             width: 100%;
 
+            align-items: center;
+            justify-content: center;
+
             display: flex;
             flex-direction: column;
             gap: ${props.gap ? props.gap : "1rem"};

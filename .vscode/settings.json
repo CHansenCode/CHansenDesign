@@ -31,7 +31,7 @@
 
     //  root files
     "**/tsconfig.json": true,
-    "**/package.json": true,
+    "**/package.json": false,
     "**/package-lock.json": true,
 
     // stuff
