@@ -21,6 +21,7 @@
     "next-auth.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "Types/*.d.ts",
     "api-lib/mongo/users.js",
     "next.config.js"
   ],

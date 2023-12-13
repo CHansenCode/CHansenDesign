@@ -7,8 +7,8 @@
     "editor.lineHighlightBackground": "#ffffff00",
     "editor.lineHighlightBorder": "#00f7ff07",
     "editorLineNumber.foreground": "#ffffff0c",
-    "editorIndentGuide.activeBackground": "#696969",
-    "editorIndentGuide.background": "#3a3a3a07"
+    "editorIndentGuide.activeBackground1": "#696969",
+    "editorIndentGuide.background1": "#3a3a3a07"
   },
 
   "files.exclude": {
@@ -30,14 +30,14 @@
     "**/process.d.ts": true,
 
     //  root files
-    "**/tsconfig.json": true,
+    "**/tsconfig.json": false,
     "**/package.json": false,
     "**/package-lock.json": true,
 
     // stuff
     "**/api-lib": false,
     "**/lib": false,
-    "**/types": true,
+    "**/types": false,
     "**/public": true,
     "**/examples": false
   }

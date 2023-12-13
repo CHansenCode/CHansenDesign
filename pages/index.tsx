@@ -1,13 +1,18 @@
+import { useSession } from "next-auth/react";
+
 import { useRouter } from "next/router";
 import { Button } from "../components";
 
 export default function IndexPage() {
+  const { data: session } = useSession();
   const router = useRouter();
+
+  const loggedIn = session?.user;
+
   return (
     <>
-      <section>
-        Landing page eh
-        <Button text="caticorn" onClick={() => router.push("/caticorn")} />
+      <section onClick={() => console.log(loggedIn)}>
+        Landing page, empty for now.
       </section>
 
       <style jsx>{`

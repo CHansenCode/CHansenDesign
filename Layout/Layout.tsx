@@ -5,7 +5,7 @@ import { Main } from "./Main";
 import { Dashboard } from "./Dashboard";
 import { GlobalStyles } from "./GlobalStyles";
 
-import { useColors } from "../lib";
+import { useColors } from "../hooks/useColors";
 
 const Layout = ({ children, ...props }: Props) => {
   const { data: session } = useSession();

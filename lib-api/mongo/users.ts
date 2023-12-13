@@ -1,29 +1,30 @@
 import { ObjectId } from "mongodb";
-import client from "../../lib-api/mongo/client";
+import client from "./client";
 
-const collection = "users";
-let db = client.collection(collection);
+const col = "users";
+let db = client.collection(col);
 
 export async function getAll() {
   try {
     const response = await db.find().toArray();
     return response;
   } catch (error) {
+    console.log(error);
     return error;
   }
 }
-export async function findByIdAndDelete(db, id) {
+export async function findByIdAndDelete(id: string) {
   try {
     const { value } = await db.findOneAndDelete({ _id: new ObjectId(id) }); //res = {?}
-
-    console.log("delete one users");
-
     return value;
   } catch (error) {
     console.log(error);
   }
 }
-export async function findByIdAndUpdate(db, id, data) {
+export async function findByIdAndUpdate(
+  id: string,
+  form: { title: string; tasks: string }
+) {
   try {
     const { value } = await db.findOneAndUpdate(
       {
@@ -31,28 +32,16 @@ export async function findByIdAndUpdate(db, id, data) {
       },
       {
         $set: {
-          title: data.title,
-          tasks: data.tasks,
+          title: form.title,
+          tasks: form.tasks,
         },
       },
       {
         returnDocument: "after",
       }
     );
-
-    console.log("patch one users, mongo func");
-
     return value;
   } catch (error) {
     console.log("error in mongo func, updating workstation");
-  }
-}
-export async function findOneById(id) {
-  try {
-    let response = await db.findOneById(new ObjectId(id));
-
-    return response;
-  } catch (error) {
-    return false;
   }
 }

@@ -1,13 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getAll } from "../../../lib-api/mongo/caticorn";
+import { findOneById } from "../../../../api-lib/mongo/users";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  let { id } = req.body;
+
   try {
-    const db = await getAll();
-    res.status(200).json(db);
+    const users = await findOneById(id);
+
+    res.status(200).json(users);
   } catch (error) {
     res.status(400).json(error);
   }
