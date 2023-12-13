@@ -18,7 +18,7 @@
     "**/middleware.ts": false,
     "**/README.md": true,
 
-    "**/.next": true,
+    "**/.next": false,
     "**/.github": true,
     "**/.git": true,
     "**/.gitignore": true,
