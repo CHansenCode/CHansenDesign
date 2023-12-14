@@ -7,8 +7,8 @@
     "editor.lineHighlightBackground": "#ffffff00",
     "editor.lineHighlightBorder": "#00f7ff07",
     "editorLineNumber.foreground": "#ffffff0c",
-    "editorIndentGuide.activeBackground": "#696969",
-    "editorIndentGuide.background": "#3a3a3a07"
+    "editorIndentGuide.activeBackground1": "#696969",
+    "editorIndentGuide.background1": "#3a3a3a07"
   },
 
   "files.exclude": {
@@ -19,11 +19,11 @@
     "**/README.md": false,
 
     "**/.next": false,
-    "**/.github": false,
-    "**/.git": false,
-    "**/.gitignore": false,
-    "**/node_modules": false,
-    "**/LICENSE": false,
+    "**/.github": true,
+    "**/.git": true,
+    "**/.gitignore": true,
+    "**/node_modules": true,
+    "**/LICENSE": true,
 
     "**/next-auth.d.ts": false,
     "**/next-env.d.ts": false,
@@ -32,13 +32,13 @@
     //  root files
     "**/tsconfig.json": false,
     "**/package.json": false,
-    "**/package-lock.json": false,
+    "**/package-lock.json": true,
 
     // stuff
     "**/api-lib": false,
     "**/lib": false,
     "**/types": false,
-    "**/public": false,
+    "**/public": true,
     "**/examples": false
   }
 }

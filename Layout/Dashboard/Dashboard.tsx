@@ -24,13 +24,14 @@ export const Dashboard = ({ ...props }: Props) => {
           </ul>
           <ul>
             <Text text="Edit" type="label" margin="0 0 0.5rem 0" />
-            <NavLink text="slides" href="/dashboard/slides" />
-            <NavLink text="cv" href="/dashboard/cv" />
+            <NavLink text="slides" href="/edit/slides" />
+            <NavLink text="cv" href="/edit/cv" />
           </ul>
           <ul>
             <Text text="View" type="label" margin="0 0 0.5rem 0" />
             <NavLink text="slides" href="/view/slides" />
             <NavLink text="cv" href="/view/cv" />
+            <NavLink text="Journal" href="/edit/journal" />
           </ul>
           <ul>
             <Text text="Page" type="label" margin="0 0 0.5rem 0" />

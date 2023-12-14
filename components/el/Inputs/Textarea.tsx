@@ -1,7 +1,6 @@
-import { Text } from "../Text";
-import { Button } from "../Button";
-
 import { useState } from "react";
+
+import { Button, Text } from "../../";
 
 export const Textarea = ({ ...props }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
