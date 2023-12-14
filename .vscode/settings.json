@@ -13,32 +13,32 @@
 
   "files.exclude": {
     "**/.env.local": false,
-    "**/.env.local.EXAMPLE": true,
+    "**/.env.local.EXAMPLE": false,
 
     "**/middleware.ts": false,
-    "**/README.md": true,
+    "**/README.md": false,
 
-    "**/.next": true,
-    "**/.github": true,
-    "**/.git": true,
-    "**/.gitignore": true,
-    "**/node_modules": true,
-    "**/LICENSE": true,
+    "**/.next": false,
+    "**/.github": false,
+    "**/.git": false,
+    "**/.gitignore": false,
+    "**/node_modules": false,
+    "**/LICENSE": false,
 
-    "**/next-auth.d.ts": true,
-    "**/next-env.d.ts": true,
-    "**/process.d.ts": true,
+    "**/next-auth.d.ts": false,
+    "**/next-env.d.ts": false,
+    "**/process.d.ts": false,
 
     //  root files
-    "**/tsconfig.json": true,
-    "**/package.json": true,
-    "**/package-lock.json": true,
+    "**/tsconfig.json": false,
+    "**/package.json": false,
+    "**/package-lock.json": false,
 
     // stuff
     "**/api-lib": false,
     "**/lib": false,
-    "**/types": true,
-    "**/public": true,
+    "**/types": false,
+    "**/public": false,
     "**/examples": false
   }
 }
