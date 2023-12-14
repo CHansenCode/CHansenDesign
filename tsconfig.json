@@ -24,7 +24,7 @@
     "Types/*.d.ts",
     "api-lib/mongo/users.js",
     "next.config.js",
-    "feature/journal/index.js"
+    "feature/journal/index.ts"
   ],
   "exclude": ["node_modules"]
 }

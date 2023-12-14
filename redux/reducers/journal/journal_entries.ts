@@ -4,7 +4,7 @@ import journalsApi from "../../../lib-api/axios/journal/entries";
 
 export const fetchEntries = createAsyncThunk(
   "journal/fetchEntries",
-  async (params, thunkAPI) => {
+  async (params: object, thunkAPI) => {
     console.log(params);
     const { data } = await journalsApi.getEntries(params);
     console.log(data);
