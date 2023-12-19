@@ -11,7 +11,7 @@ export default async function middleware(request: NextRequest) {
   //   { status: 200, headers: { "content-type": "application/json" } }
   // );
 
-  console.log("triggered middleware", request);
+  console.log("mw url src =>", request.url);
 }
 
 export const config = {

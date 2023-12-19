@@ -4,23 +4,23 @@ import journalsApi from "../../../lib-api/axios/journal/entries";
 
 export const fetchEntries = createAsyncThunk(
   "journal/fetchEntries",
-  async (params: object, thunkAPI) => {
+  async (params: { channelId: string; date: string }, thunkAPI) => {
     console.log(params);
     const { data } = await journalsApi.getEntries(params);
     console.log(data);
     return data;
   }
 );
-export const postJournal = createAsyncThunk(
+export const postEntry = createAsyncThunk(
   "journal/postOne",
-  async (form, thunkAPI) => {
+  async (form: object, thunkAPI) => {
     const { data } = await journalsApi.postEntry(form);
     process.env.NODE_ENV === "development" &&
       console.log("journal_postOne", data);
     return data;
   }
 );
-export const patchJournal = createAsyncThunk(
+export const patchEntry = createAsyncThunk(
   "journal/patchOne",
   async (form: journalEntry, thunkAPI) => {
     const { data } = await journalsApi.patchEntry(form);
@@ -29,7 +29,7 @@ export const patchJournal = createAsyncThunk(
     return data;
   }
 );
-export const deleteJournal = createAsyncThunk(
+export const deleteEntry = createAsyncThunk(
   "journal/deleteOne",
   async (id: string, thunkAPI) => {
     const { data } = await journalsApi.deleteEntry(id);
@@ -50,26 +50,26 @@ export const journalSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // builder.addCase(fetchJournals.fulfilled, (state, action) => {
-    //   state.data = [
-    //     ...state.data,
-    //     ...action.payload.filter(
-    //       (a: journalEntry) =>
-    //         !state.data.find((b: journalEntry) => b._id === a._id)
-    //     ),
-    //   ];
-    // });
-    builder.addCase(postJournal.fulfilled, (state, action) => {
+    builder.addCase(fetchEntries.fulfilled, (state, action) => {
+      state.data = [
+        ...state.data,
+        ...action.payload.filter(
+          (a: journalEntry) =>
+            !state.data.find((b: journalEntry) => b._id === a._id)
+        ),
+      ];
+    });
+    builder.addCase(postEntry.fulfilled, (state, action) => {
       state.data = [...state.data, action.payload];
     });
-    builder.addCase(patchJournal.fulfilled, (state, action) => {
+    builder.addCase(patchEntry.fulfilled, (state, action) => {
       state.data = [
         ...state.data.map((a: journalEntry) =>
           a._id === action.payload._id ? action.payload : a
         ),
       ];
     });
-    builder.addCase(deleteJournal.fulfilled, (state, action) => {
+    builder.addCase(deleteEntry.fulfilled, (state, action) => {
       state.data = [
         ...state.data.filter(
           (a: journalEntry) => !(a._id === action.payload._id)

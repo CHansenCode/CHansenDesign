@@ -12,15 +12,23 @@ export async function getUserChannels(userId: string) {
     return error;
   }
 }
-export async function postOne(form: journalEntry) {
+export async function postOne(form: JournalPost) {
   try {
-    const res = await db.insertOne({ ...form, createdOn: new Date() });
+    const res = await db.insertOne({
+      name: form.name,
+      editors: form.editors,
+      users: form.users,
+      createdOn: new Date(),
+      updatedOn: new Date(),
+      updatedBy: form.user,
+    });
+
     return { ...form, _id: res.insertedId };
   } catch (error) {
     return error;
   }
 }
-export async function findByIdAndUpdate(form: journalEntry) {
+export async function findByIdAndUpdate(form: JournalPost) {
   try {
     const { value } = await db.findOneAndUpdate(
       {
@@ -28,8 +36,11 @@ export async function findByIdAndUpdate(form: journalEntry) {
       },
       {
         $set: {
-          title: form.title,
-          body: form.body,
+          name: form.name,
+          editors: form.editors,
+          users: form.users,
+          updatedOn: new Date(),
+          updatedBy: form.users,
         },
       },
       {
@@ -56,3 +67,14 @@ export default {
   findByIdAndDelete,
   findByIdAndUpdate,
 };
+
+interface JournalPost {
+  _id?: string;
+  name: string;
+  editors: [string];
+  users: [string];
+  user: string;
+  updatedOn?: Date;
+  updatedBy?: Date;
+  createdOn?: Date;
+}

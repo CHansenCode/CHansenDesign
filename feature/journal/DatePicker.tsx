@@ -52,20 +52,44 @@ const DateItem = (props: dateItemTypes) => {
   let dd = props.date.substring(8, 10);
   let dayOfWeek = dates(props.date).dow;
 
+  let iStyle = {
+    color:
+      dayOfWeek === "Sunday" || dayOfWeek === "Saturday" ? "salmon" : "inherit",
+  };
+
   return (
-    <div className={styles.dateItem} onClick={() => dateClick("value")}>
+    <div
+      className={styles.dateItem}
+      style={iStyle}
+      onClick={() => dateClick("value")}
+    >
       <Text type="h5" text={dd} style={{ fontWeight: 700 }} />
-      <Text type="h6" text={`${dayOfWeek}`.substring(0, 3).toUpperCase()} />
+      <Text
+        type="h6"
+        style={{ fontSize: "0.5rem" }}
+        text={`${dayOfWeek}`.substring(0, 3).toUpperCase()}
+      />
     </div>
   );
 };
 const CurrentDate = (props: dateItemTypes) => {
-  let dd = `${props.value}`.substring(6, 8);
+  let dd = `${props.date}`.substring(8, 10);
+  let dayOfWeek = dates(props.date).dow;
+
+  let iStyle = {
+    display: "grid",
+    color:
+      dayOfWeek === "Sunday" || dayOfWeek === "Saturday" ? "salmon" : "inherit",
+  };
 
   return (
-    <div onClick={() => dateClick("value")}>
-      <Text type="h4" text={dd} style={{ fontWeight: 700 }} />
-      <Text type="h5" text="mon" />
+    <div style={iStyle} onClick={() => dateClick("value")}>
+      <Text
+        type="h4"
+        text={dd}
+        style={{ fontWeight: 700, textAlign: "center" }}
+      />
+      <Text type="h5" text={`${dayOfWeek}`.substring(0, 3).toUpperCase()} />
     </div>
   );
 };

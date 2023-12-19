@@ -2,7 +2,7 @@ import axios from "axios";
 
 const route = "/api/journal/entries";
 const getEntries = async (params: any) =>
-  axios.get(`${route}?channelId=${params.channelId}`);
+  axios.get(`${route}?channelId=${params.channelId}&date=${params.date}`);
 const postEntry = async (form: any) => axios.post(route, form);
 const patchEntry = async (form: journalEntry) => axios.patch(route, form);
 const deleteEntry = async (id: string) =>

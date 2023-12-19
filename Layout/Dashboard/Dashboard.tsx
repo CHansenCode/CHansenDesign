@@ -3,8 +3,10 @@ import { useSelector } from "react-redux";
 
 import { Logo, Text } from "../../components";
 import { NavLink, Footer } from "./";
+import { useSession } from "next-auth/react";
 
 export const Dashboard = ({ ...props }: Props) => {
+  const { data } = useSession();
   const store: any = useSelector((s) => s);
   const visible: boolean = store.global.showDash;
 
@@ -18,27 +20,41 @@ export const Dashboard = ({ ...props }: Props) => {
         </header>
 
         <div>
+          <section>
+            <Text type="h6" text="Logged in as:" />
+            <Text type="h5" text={data?.user.email ? data?.user.email : "-"} />
+          </section>
+
           <ul>
-            <Text text="Admin" type="label" margin="0 0 0.5rem 0" />
-            <NavLink text="users" href="/admin/users" />
+            {/* <Text text="Admin" type="label" margin="0 0 0.5rem 0" /> */}
+            {/* <NavLink text="users" href="/admin/users" /> */}
           </ul>
           <ul>
-            <Text text="Edit" type="label" margin="0 0 0.5rem 0" />
-            <NavLink text="slides" href="/edit/slides" />
-            <NavLink text="cv" href="/edit/cv" />
+            {/* <Text text="Edit" type="label" margin="0 0 0.5rem 0" /> */}
+            {/* <NavLink text="slides" href="/edit/slides" />
+            <NavLink text="cv" href="/edit/cv" /> */}
           </ul>
           <ul>
-            <Text text="View" type="label" margin="0 0 0.5rem 0" />
-            <NavLink text="slides" href="/view/slides" />
-            <NavLink text="cv" href="/view/cv" />
+            <NavLink text="Key clue" href="/aiste/key" />
+            <NavLink text="17" href="/aiste/seventeen" />
+            <NavLink text="18" href="/aiste/eighteen" />
+            <NavLink text="19" href="/aiste/nineteen" />
+            <NavLink text="20" href="/aiste/twenty" />
+            <NavLink text="21" href="/aiste/twentyone" />
+            <NavLink text="22" href="/aiste/twentytwo" />
+            <NavLink text="23" href="/aiste/twentythree" />
+            <NavLink text="24" href="/aiste/xmas" />
+            {/* <Text text="View" type="label" margin="0 0 0.5rem 0" /> */}
+            {/* <NavLink text="slides" href="/view/slides" />
+            <NavLink text="cv" href="/view/cv" /> */}
             <NavLink text="Journal" href="/edit/journal" />
           </ul>
           <ul>
-            <Text text="Page" type="label" margin="0 0 0.5rem 0" />
-            <NavLink text="Frontpage" href="/" />
+            {/* <Text text="Page" type="label" margin="0 0 0.5rem 0" /> */}
+            {/* <NavLink text="Frontpage" href="/" />
             <NavLink text="Architecture" href="/architecture" />
             <NavLink text="Webdesign" href="/webdesign" />
-            <NavLink text="About" href="/about" />
+            <NavLink text="About" href="/about" /> */}
           </ul>
         </div>
 
@@ -65,6 +81,11 @@ export const Dashboard = ({ ...props }: Props) => {
             gap: 2rem;
 
             transition: 0.3s ease;
+          }
+
+          section {
+            width: 100%;
+            text-align: center;
           }
 
           header {

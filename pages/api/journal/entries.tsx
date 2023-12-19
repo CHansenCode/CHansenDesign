@@ -23,10 +23,10 @@ export default async function handler(
   return res.status(200).json(JSON.stringify(req.query));
 
   if (req.method === "GET") {
-    if (!req.body.date) {
+    if (!req.query.date) {
       return res.status(400).json("missing date param for request.");
     }
-    if (!req.body.channelId) {
+    if (!req.query.channelId) {
       return res.status(400).json("missing channelID param for request");
     }
 

@@ -8,6 +8,13 @@ export const fetchUserChannels = createAsyncThunk(
     return data;
   }
 );
+export const postChannel = createAsyncThunk(
+  "journal_channels/postChannel",
+  async (form: object, thunkAPI) => {
+    const { data } = await journalChannelApi.postChannel(form);
+    return data;
+  }
+);
 
 const initialState: journalChannelState = {
   status: "idle",
@@ -24,10 +31,13 @@ export const journalChannelSlice = createSlice({
       state.data = [
         ...state.data,
         ...action.payload.filter(
-          (a: journalEntry) =>
-            !state.data.find((b: journalEntry) => b._id === a._id)
+          (a: journalChannelResponse) =>
+            !state.data.find((b: journalChannelResponse) => b._id === a._id)
         ),
       ];
+    });
+    builder.addCase(postChannel.fulfilled, (state, action) => {
+      state.data = [...state.data, action.payload];
     });
   },
 });
@@ -40,4 +50,11 @@ export interface journalChannelState {
   status: String;
   ["data"]: any;
   error: null | Object;
+}
+
+interface journalChannelResponse {
+  _id: string;
+  name: string;
+  editors: [string] | [];
+  users: [string] | [];
 }

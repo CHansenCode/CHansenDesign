@@ -7,16 +7,21 @@ export const Input = ({ ...props }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [hoverInfo, setHoverInfo] = useState(false);
 
+  console.log(props);
+
   return (
     <>
-      <div>
+      <div style={props.style}>
         <header>
           {props.label ? (
-            <Text text={props.label} type="label" className="sc" />
+            <Text
+              text={props.label}
+              type="label"
+              className={props.labelClass ? props.labelClass : "sc"}
+            />
           ) : (
             <div />
           )}
-
           {props.info && (
             <div
               onMouseEnter={() => setHoverInfo(true)}
@@ -38,7 +43,8 @@ export const Input = ({ ...props }: Props) => {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           disabled={props.disabled ? props.disabled : false}
-          onChange={props.onChange}
+          onChange={(e) => props.onChange(`${e.target.value}`)}
+          placeholder={props.placeholder}
         />
 
         <span className={`pseudoborder${isFocused ? " sc" : ""}`} />
@@ -50,6 +56,8 @@ export const Input = ({ ...props }: Props) => {
             position: relative;
             height: 3rem;
             width: 100%;
+
+            color: inherit;
 
             border: thin solid transparent;
           }
@@ -67,6 +75,8 @@ export const Input = ({ ...props }: Props) => {
             position: relative;
             height: 2rem;
             width: 100%;
+
+            color: inherit;
 
             background: transparent;
             border: thin solid transparent;
@@ -99,9 +109,12 @@ type Props = {
   onChange: any;
   value: string | number | undefined;
   myRef?: any;
+  placeholder?: string;
 
   label?: string;
+  labelClass?: string;
   info?: string;
+  style?: object;
 
   active?: boolean;
   disabled?: boolean;

@@ -61,7 +61,6 @@ const Fonts = ({ colors }: Props) => {
         p,
         button {
           font-family: poppins, sans-serif;
-          color: ${colors.pc};
         }
         h1,
         h2,

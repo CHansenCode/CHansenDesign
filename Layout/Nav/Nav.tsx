@@ -10,23 +10,23 @@ type Props = {
   children?: React.ReactNode;
 };
 
-const links = [
-  {
-    as: "Architecture",
-    href: "/architecture",
-  },
-  {
-    as: "Webdesign",
-    href: "/webdesign",
-  },
-  {
-    as: "About",
-    href: "/about",
-  },
-  {
-    as: "Admin",
-    href: "/admin",
-  },
+const links: [{ as: string; href: string }] | [] = [
+  // {
+  //   as: "Architecture",
+  //   href: "/architecture",
+  // },
+  // {
+  //   as: "Webdesign",
+  //   href: "/webdesign",
+  // },
+  // {
+  //   as: "About",
+  //   href: "/about",
+  // },
+  // {
+  //   as: "Admin",
+  //   href: "/admin",
+  // },
 ];
 
 export const Nav = ({ ...props }: Props) => {
@@ -41,11 +41,13 @@ export const Nav = ({ ...props }: Props) => {
         </Link>
 
         <ul className="pc1b">
-          {links.map((a, i) => (
-            <Link key={`${a.as}${i}`} href={a.href}>
-              <NavLink text={a.as} />
-            </Link>
-          ))}
+          {links.length
+            ? links.map((a: any, i: number) => (
+                <Link key={`${a.as}${i}`} href={a.href}>
+                  <NavLink text={a.as} />
+                </Link>
+              ))
+            : console.log("no links")}
         </ul>
 
         <a

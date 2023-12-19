@@ -27,15 +27,19 @@ export default async function handler(
   if (req.method === "POST") {
     let data = await postOne({
       ...req.body,
-      user: user.email,
-    } as journalEntry);
+      editors: [user._id],
+      users: [user._id],
+      updatedBy: user.email,
+    });
+
     return res.status(200).json(data);
   }
   if (req.method === "PUT") {
     let data = await findByIdAndUpdate({
       ...req.body,
       user: user.email,
-    } as journalEntry);
+      updatedBy: user.email,
+    });
     return res.status(200).json(data);
   }
   if (req.method === "DELETE") {

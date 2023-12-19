@@ -35,7 +35,7 @@ export const Footer = ({ ...props }: any) => {
           <div></div>
         </header>
 
-        <main className="mid pc3b">
+        {/* <main className="mid pc3b">
           <div className="pc3b">
             <Link href="/">
               <Button type="home" height="100%" width="100%" border="none" />
@@ -66,7 +66,7 @@ export const Footer = ({ ...props }: any) => {
               <Button type="chat" height="100%" width="100%" border="none" />
             </Link>
           </div>
-        </main>
+        </main> */}
 
         <footer className="pc3b">
           <div className="pc3b">
@@ -98,7 +98,7 @@ export const Footer = ({ ...props }: any) => {
       <style jsx>
         {`
           section {
-            height: 6rem;
+            height: 4rem;
             width: 100%;
           }
           header,

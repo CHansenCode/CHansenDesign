@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-type Props = {};
-
 export const NavLink = (props: any) => {
   const { pathname } = useRouter();
 
@@ -47,3 +45,5 @@ export const NavLink = (props: any) => {
     </>
   );
 };
+
+type Props = {};

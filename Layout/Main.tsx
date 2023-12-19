@@ -5,7 +5,9 @@ export const Main = ({ children, loggedIn, ...props }: Props) => {
 
   return (
     <>
-      <main>{children}</main>
+      <main>
+        <section>{children}</section>
+      </main>
 
       <style jsx>
         {`
@@ -20,6 +22,25 @@ export const Main = ({ children, loggedIn, ...props }: Props) => {
             overflow-y: auto;
 
             transition: 0.2s ease;
+          }
+
+          section {
+            padding-top: 10vh;
+            padding-left: 10vh;
+            padding-right: 10vh;
+            padding-bottom: 20vh;
+
+            display: flex;
+            flex-alignment: column;
+            justify-content: center;
+
+            overflow: auto;
+          }
+
+          @media screen and (max-width: 800px) {
+            section {
+              padding-top: 5vh;
+            }
           }
         `}
       </style>

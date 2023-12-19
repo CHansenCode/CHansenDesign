@@ -1,7 +1,7 @@
 export const Para = ({ ...props }: Props) => {
   return (
     <>
-      <p {...props}>{props.text}</p>
+      <p>{props.text}</p>
 
       <style jsx>
         {`
