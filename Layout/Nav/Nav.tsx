@@ -41,13 +41,15 @@ export const Nav = ({ ...props }: Props) => {
         </Link>
 
         <ul className="pc1b">
-          {links.length
-            ? links.map((a: any, i: number) => (
-                <Link key={`${a.as}${i}`} href={a.href}>
-                  <NavLink text={a.as} />
-                </Link>
-              ))
-            : console.log("no links")}
+          {links.length > 0 ? (
+            links.map((a: any, i: number) => (
+              <Link key={`${a.as}${i}`} href={a.href}>
+                <NavLink text={a.as} />
+              </Link>
+            ))
+          ) : (
+            <></>
+          )}
         </ul>
 
         <a
