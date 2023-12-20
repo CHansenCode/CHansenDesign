@@ -1,13 +1,13 @@
 declare global {
   interface journalEntry {
     _id: string;
-    channel_id: string;
+    channelId: string;
     date: string;
     title: string;
     body: string;
     createdOn: Date;
     updatedOn: Date;
-    user: string;
+    updatedBy: string;
   }
   interface journalChannel {
     _id: string;

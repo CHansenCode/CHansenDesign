@@ -1,0 +1,43 @@
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 11;
+
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.form {
+  position: relative;
+  width: 80vw;
+  max-width: 20rem;
+
+  padding: 1rem;
+
+  box-shadow: 0 0 2rem -1rem currentColor;
+}
+
+.pseudoBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.15;
+  border: thin solid currentColor;
+
+  pointer-events: none;
+}

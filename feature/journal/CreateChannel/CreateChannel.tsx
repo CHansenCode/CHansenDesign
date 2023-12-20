@@ -1,12 +1,15 @@
-import { ReactEventHandler, useState } from "react";
+import { useState } from "react";
 
 import { Button, Inputs } from "../../../components";
 
 import * as journalActions from "../../../redux/reducers/journal/journal_channels";
 import { useAppDispatch } from "../../../redux/hooks";
 
+import styles from "./CreateChannel.module.css";
+
 export function CreateChannel(props: any) {
   const dispatch = useAppDispatch();
+  const [state, setState] = useState({ open: false });
   const [form, setForm] = useState({
     name: "",
   });
@@ -24,9 +27,9 @@ export function CreateChannel(props: any) {
     }
 
     try {
-      let res = await dispatch(journalActions.postChannel(form));
-
-      console.log(res);
+      let { payload }: any = await dispatch(journalActions.postChannel(form));
+      setState({ ...state, open: false });
+      props.parSet({ ...props.parState, activeChannel: payload._id });
     } catch (error) {
       return;
       //dispatch(toast(error.response.message));
@@ -35,16 +38,36 @@ export function CreateChannel(props: any) {
 
   return (
     <>
-      <form onSubmit={(e) => submit(e, form)}>
-        <Inputs
-          type="input"
-          placeholder="Channel name"
-          value={form.name}
-          onChange={(e: any) => setForm({ ...form, name: e.target.value })}
-        />
-      </form>
+      <div
+        className={`bg ${styles.wrapper} ${state.open ? styles.active : ""}`}
+      >
+        <div>
+          <header>
+            <Button
+              type="close"
+              style={{ height: "2rem", width: "2rem" }}
+              onClick={() => setState({ ...state, open: false })}
+            />
+          </header>
+        </div>
+        <form className={styles.form} onSubmit={(e) => submit(e, form)}>
+          <Inputs
+            type="input"
+            placeholder="Channel name"
+            value={form.name}
+            onChange={(cb: string) => setForm({ ...form, name: cb })}
+          />
 
-      <Button type="subtitle" text="+" style={iStyle} />
+          <div className={styles.pseudoBorder} />
+        </form>
+      </div>
+
+      <Button
+        type="subtitle"
+        text="+"
+        style={iStyle}
+        onClick={() => setState({ ...state, open: true })}
+      />
     </>
   );
 }
@@ -55,10 +78,3 @@ let iStyle = {
   borderRadius: "50%",
   fontSize: "2rem",
 };
-
-async function postChannel(form: any) {
-  try {
-  } catch (error) {
-    console.log(error);
-  }
-}

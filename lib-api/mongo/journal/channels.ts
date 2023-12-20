@@ -20,7 +20,7 @@ export async function postOne(form: JournalPost) {
       users: form.users,
       createdOn: new Date(),
       updatedOn: new Date(),
-      updatedBy: form.user,
+      updatedBy: form.updatedBy,
     });
 
     return { ...form, _id: res.insertedId };

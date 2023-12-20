@@ -14,7 +14,6 @@ export const journalDateSlice = createSlice({
   initialState,
   reducers: {
     decrementDate: (state) => {
-      console.log("decrement", dates);
       let newDate = dates(state.active, -24);
       state.active = newDate.isoString;
       state.integer = newDate.integer;

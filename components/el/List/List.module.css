@@ -1,0 +1,56 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 20rem;
+  height: 3rem;
+}
+
+.header {
+  height: 3rem;
+
+  padding: 0 0 0 1rem;
+
+  display: grid;
+  grid-template-columns: 1fr 3rem;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.list {
+  position: absolute;
+  z-index: 10;
+
+  height: 10rem;
+  width: 100%;
+
+  border: thin solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 1rem -0.2rem rgba(0, 0, 0, 0.1);
+
+  top: 100%;
+  left: 0;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.listOpen {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.item {
+  height: 2rem;
+  padding: 0 0 0 0.5rem;
+
+  border-bottom: thin solid rgba(0, 0, 0, 0.1);
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+.item:hover {
+  padding: 0 0 0 0.75rem;
+}

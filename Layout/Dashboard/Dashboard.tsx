@@ -35,7 +35,7 @@ export const Dashboard = ({ ...props }: Props) => {
             <NavLink text="cv" href="/edit/cv" /> */}
           </ul>
           <ul>
-            <NavLink text="Key clue" href="/aiste/key" />
+            {/* <NavLink text="Key clue" href="/aiste/key" />
             <NavLink text="17" href="/aiste/seventeen" />
             <NavLink text="18" href="/aiste/eighteen" />
             <NavLink text="19" href="/aiste/nineteen" />
@@ -43,7 +43,7 @@ export const Dashboard = ({ ...props }: Props) => {
             <NavLink text="21" href="/aiste/twentyone" />
             <NavLink text="22" href="/aiste/twentytwo" />
             <NavLink text="23" href="/aiste/twentythree" />
-            <NavLink text="24" href="/aiste/xmas" />
+            <NavLink text="24" href="/aiste/xmas" /> */}
             {/* <Text text="View" type="label" margin="0 0 0.5rem 0" /> */}
             {/* <NavLink text="slides" href="/view/slides" />
             <NavLink text="cv" href="/view/cv" /> */}

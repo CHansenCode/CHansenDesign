@@ -20,30 +20,40 @@ export default async function handler(
     return res.status(400).json("No user found");
   }
 
-  return res.status(200).json(JSON.stringify(req.query));
-
   if (req.method === "GET") {
     if (!req.query.date) {
       return res.status(400).json("missing date param for request.");
     }
     if (!req.query.channelId) {
-      return res.status(400).json("missing channelID param for request");
+      return res.status(400).json("missing channelId param for request");
     }
 
-    let data = await getEntries(req.body.date, req.body.channelId);
-    return res.status(200).json("cow");
+    let date = `${req.query.date}`;
+    let channelId = `${req.query.channelId}`;
+
+    try {
+      let data = await getEntries(date, channelId);
+      return res.status(200).json(data);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   }
   if (req.method === "POST") {
-    let data = await postOne({
-      ...req.body,
-      user: user.email,
-    } as journalEntry);
-    return res.status(200).json(data);
+    try {
+      let data = await postOne({
+        ...req.body,
+        updatedBy: user.email,
+      } as journalEntry);
+      return res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json(error);
+    }
   }
   if (req.method === "PUT") {
     let data = await findByIdAndUpdate({
       ...req.body,
-      user: user.email,
+      updatedBy: user.email,
     } as journalEntry);
     return res.status(200).json(data);
   }

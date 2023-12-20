@@ -20,6 +20,8 @@ export default async function handler(
     return res.status(400).json("No user found");
   }
 
+  console.log(user);
+
   if (req.method === "GET") {
     let data = await getUserChannels(user._id);
     return res.status(200).json(data);

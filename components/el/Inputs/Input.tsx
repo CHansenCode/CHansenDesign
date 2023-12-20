@@ -7,8 +7,6 @@ export const Input = ({ ...props }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [hoverInfo, setHoverInfo] = useState(false);
 
-  console.log(props);
-
   return (
     <>
       <div style={props.style}>
