@@ -50,7 +50,9 @@ export default async function handler(
       return res.status(400).json(error);
     }
   }
-  if (req.method === "PUT") {
+  if (req.method === "PATCH") {
+    console.log("i did this!", req.body);
+
     let data = await findByIdAndUpdate({
       ...req.body,
       updatedBy: user.email,

@@ -20,6 +20,7 @@
 }
 
 .dateItem {
+  position: relative;
   height: 3rem;
   width: 3rem;
 
@@ -38,4 +39,26 @@
   border: thin solid currentColor;
 
   cursor: pointer;
+}
+
+.dateCurrent {
+  position: relative;
+}
+
+.dateCurrent .valIndicator {
+  top: 0;
+  left: 1rem;
+}
+
+.valIndicator {
+  position: absolute;
+  content: " ";
+  height: 0.25rem;
+  width: 0.25rem;
+  border: thin solid currentColor;
+  top: 0.5rem;
+  left: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
 }

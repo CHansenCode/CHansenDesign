@@ -27,15 +27,36 @@ export function DatePicker(props: any) {
         />
       </div>
 
-      <DateItem date={dates(storeDate.active, -24 * 3).isoString} />
-      <DateItem date={dates(storeDate.active, -24 * 2).isoString} />
-      <DateItem date={dates(storeDate.active, -24 * 1).isoString} />
+      <DateItem
+        date={dates(storeDate.active, -24 * 3).isoString}
+        activeChannel={props.activeChannel ? props.activeChannel._id : ""}
+      />
+      <DateItem
+        date={dates(storeDate.active, -24 * 2).isoString}
+        activeChannel={props.activeChannel ? props.activeChannel._id : ""}
+      />
+      <DateItem
+        date={dates(storeDate.active, -24 * 1).isoString}
+        activeChannel={props.activeChannel ? props.activeChannel._id : ""}
+      />
 
-      <CurrentDate date={dates(storeDate.active).isoString} />
+      <CurrentDate
+        date={dates(storeDate.active).isoString}
+        activeChannel={props.activeChannel ? props.activeChannel._id : ""}
+      />
 
-      <DateItem date={dates(storeDate.active, 24 * 1).isoString} />
-      <DateItem date={dates(storeDate.active, 24 * 2).isoString} />
-      <DateItem date={dates(storeDate.active, 24 * 3).isoString} />
+      <DateItem
+        date={dates(storeDate.active, 24 * 1).isoString}
+        activeChannel={props.activeChannel ? props.activeChannel._id : ""}
+      />
+      <DateItem
+        date={dates(storeDate.active, 24 * 2).isoString}
+        activeChannel={props.activeChannel ? props.activeChannel._id : ""}
+      />
+      <DateItem
+        date={dates(storeDate.active, 24 * 3).isoString}
+        activeChannel={props.activeChannel ? props.activeChannel._id : ""}
+      />
 
       <div>
         <Button
@@ -51,6 +72,11 @@ export function DatePicker(props: any) {
 const DateItem = (props: dateItemTypes) => {
   let dd = props.date.substring(8, 10);
   let dayOfWeek = dates(props.date).dow;
+
+  const exists = useAppSelector((s) => s.journalEntries.data);
+  let isThere = exists.find((a: any) => a.date === dates(props.date).integer)
+    ? true
+    : false;
 
   let iStyle = {
     color:
@@ -69,12 +95,19 @@ const DateItem = (props: dateItemTypes) => {
         style={{ fontSize: "0.5rem" }}
         text={`${dayOfWeek}`.substring(0, 3).toUpperCase()}
       />
+
+      {isThere && <div className={styles.valIndicator} />}
     </div>
   );
 };
 const CurrentDate = (props: dateItemTypes) => {
   let dd = `${props.date}`.substring(8, 10);
   let dayOfWeek = dates(props.date).dow;
+
+  const exists = useAppSelector((s) => s.journalEntries.data);
+  let isThere = exists.find((a: any) => a.date === dates(props.date).integer)
+    ? true
+    : false;
 
   let iStyle = {
     display: "grid",
@@ -83,13 +116,19 @@ const CurrentDate = (props: dateItemTypes) => {
   };
 
   return (
-    <div style={iStyle} onClick={() => dateClick("value")}>
+    <div
+      style={iStyle}
+      className={styles.dateCurrent}
+      onClick={() => dateClick("value")}
+    >
       <Text
         type="h4"
         text={dd}
         style={{ fontWeight: 700, textAlign: "center" }}
       />
       <Text type="h5" text={`${dayOfWeek}`.substring(0, 3).toUpperCase()} />
+
+      {isThere && <div className={styles.valIndicator} />}
     </div>
   );
 };
@@ -102,4 +141,5 @@ interface dateItemTypes {
   date: string;
   value?: number;
   hasValue?: boolean;
+  activeChannel: string;
 }

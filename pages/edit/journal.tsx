@@ -8,6 +8,7 @@ import { DatePicker, CreateChannel } from "../../feature/journal";
 import {
   fetchEntries,
   postEntry,
+  patchEntry,
 } from "../../redux/reducers/journal/journal_entries";
 import { fetchUserChannels } from "../../redux/reducers/journal/journal_channels";
 
@@ -21,7 +22,7 @@ export default function SlidesEditor(props: any) {
     activeChannel: null,
     activeJournal: null,
   } as state);
-  const [form, setForm] = useState({ _id: "", title: "", body: "" } as form);
+  const [form, setForm] = useState({ ...init.form } as form);
   const store: any = useAppSelector((s) => s);
 
   const activeChannel = store.journalChannels.data.find(
@@ -33,6 +34,11 @@ export default function SlidesEditor(props: any) {
   let fetchMore = checkFetchMore(
     new Date(store.journalDates.active),
     activeChannelData
+  );
+  let activePost = store.journalEntries.data.find(
+    (a: any) =>
+      a.channelId === state.activeChannel &&
+      a.date === store.journalDates.integer
   );
 
   function checkFetchMore(date: Date, activeArray: [any]) {
@@ -72,6 +78,15 @@ export default function SlidesEditor(props: any) {
   }
 
   useEffect(() => {
+    if (activePost) {
+      setForm({ ...form, ...activePost });
+    } else {
+      setForm({ title: "", body: "" });
+    }
+
+    console.log(form);
+  }, [store.journalDates.integer, activePost]);
+  useEffect(() => {
     if (fetchMore && activeChannel) {
       dispatch(
         fetchEntries({
@@ -81,16 +96,47 @@ export default function SlidesEditor(props: any) {
       );
     }
   }, [fetchMore, activeChannel]);
-
-  useEffect(() => {
-    if (store.journal_entries) {
-      console.log(store);
-    }
-  }, [store.journalDate]);
   useEffect(() => {
     !state.initLoad && dispatch(fetchUserChannels());
     setState({ ...state, initLoad: true });
   }, []);
+
+  async function onSubmitEntry(form: any) {
+    if (form.title.length < 1) {
+      alert("Please add some text in the title");
+      return;
+    }
+    if (form.body.length < 1) {
+      alert("Please add some text in the body");
+      return;
+    }
+
+    console.log(form);
+
+    if (activePost) {
+      try {
+        let success = await dispatch(patchEntry(form));
+        alert("success");
+        console.log(success);
+      } catch (error) {
+        console.log(error);
+        alert(
+          "Something went wrong posting this journal entry, please try again"
+        );
+      }
+    } else {
+      try {
+        let success = await dispatch(postEntry(form));
+        alert("success");
+        console.log(success);
+      } catch (error) {
+        console.log(error);
+        alert(
+          "Something went wrong posting this journal entry, please try again"
+        );
+      }
+    }
+  }
 
   props = {
     ...props,
@@ -121,7 +167,7 @@ export default function SlidesEditor(props: any) {
       </div>
 
       <div className={styles.datePicker}>
-        <DatePicker {...props} />
+        <DatePicker {...props} activeChannel={activeChannel} />
       </div>
 
       <div className={styles.paper}>
@@ -142,27 +188,18 @@ export default function SlidesEditor(props: any) {
         {activeChannel && (
           <>
             <Button
-              text="get entries"
+              text={activePost ? "Update this Entry" : "Create new Entry"}
               onClick={() =>
-                dispatch(
-                  fetchEntries({
-                    date: store.journalDates.integer,
-                    channelId: state.activeChannel ? state.activeChannel : "",
-                  })
-                )
+                onSubmitEntry({
+                  ...form,
+                  date: store.journalDates.integer,
+                  channelId: activeChannel._id,
+                })
               }
             />
             <Button
-              text="post/patch Entry"
-              onClick={() =>
-                dispatch(
-                  postEntry({
-                    ...form,
-                    date: store.journalDates.integer,
-                    channelId: activeChannel._id,
-                  })
-                )
-              }
+              text="force clear form"
+              onClick={() => setForm({ ...init.form })}
             />
           </>
         )}
@@ -171,13 +208,19 @@ export default function SlidesEditor(props: any) {
   );
 }
 
+const init = {
+  form: {
+    title: "",
+    body: "",
+  },
+};
+
 interface state {
   initLoad: boolean;
   activeChannel: string | null;
   activeJournal: string | null;
 }
 interface form {
-  _id: string;
   title: string;
   body: string;
 }
