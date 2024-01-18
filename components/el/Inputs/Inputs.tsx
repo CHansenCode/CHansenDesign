@@ -1,6 +1,7 @@
 import { Input } from "./Input";
 import { Textarea } from "./Textarea";
 import { Rich } from "./Rich";
+import { Number } from "./Number";
 
 import { File } from "./File";
 
@@ -21,7 +22,6 @@ export const Inputs = ({ ...props }: Props) => {
           placeholder={props.placeholder}
         />
       );
-      break;
     case "textarea":
       return (
         <Textarea
@@ -35,16 +35,12 @@ export const Inputs = ({ ...props }: Props) => {
           rows={props.rows}
         />
       );
-      break;
     case "number":
-      return <>number type</>;
-      break;
+      return <></>;
     case "select":
       return <>Select type</>;
-      break;
     case "qrScanner":
       return <>qrScanner type</>;
-      break;
     case "image":
       return <>Image type</>;
 
