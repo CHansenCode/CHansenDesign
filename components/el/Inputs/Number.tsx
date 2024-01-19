@@ -33,7 +33,7 @@ export function Number({ ...props }: Props) {
 
       <div className={styles.container}>
         <div className={styles.number}>
-          {largeIncrement && (
+          {largeIncrement ? (
             <Button
               style={{ ...buttonStyle }}
               disabled={largeIncrement * -1 + value < 0 && !canGoNegative}
@@ -42,6 +42,8 @@ export function Number({ ...props }: Props) {
                 largeIncrement ? handleCallBack(largeIncrement * -1) : null
               }
             />
+          ) : (
+            <div />
           )}
 
           <Button
@@ -52,7 +54,7 @@ export function Number({ ...props }: Props) {
           />
 
           <div className={styles.numberDisplay}>
-            <Text type="subtitle" style={{ ...textStyle }} text={`${value}`} />
+            <Text type="subtitle" text={`${value}`} />
           </div>
 
           <Button
@@ -61,7 +63,7 @@ export function Number({ ...props }: Props) {
             onClick={() => handleCallBack(increment)}
           />
 
-          {largeIncrement && (
+          {largeIncrement ? (
             <Button
               style={{ ...buttonStyle }}
               text={`+ ${largeIncrement}`}
@@ -69,6 +71,8 @@ export function Number({ ...props }: Props) {
                 largeIncrement ? handleCallBack(largeIncrement) : null
               }
             />
+          ) : (
+            <div />
           )}
         </div>
       </div>
@@ -92,12 +96,9 @@ type Props = {
 };
 
 const buttonStyle = {
-  width: "2.5rem",
-  height: "2.5rem",
-  padding: "0.5rem",
+  width: "1.75rem",
+  height: "1.75rem",
+  padding: "0.15rem",
   borderRadius: "50%",
-};
-const textStyle = {
-  textAlign: "center",
-  width: "100%",
+  fontSize: "0.7rem",
 };

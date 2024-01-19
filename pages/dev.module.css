@@ -1,0 +1,10 @@
+.qrContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10rem;
+}
+.qrContainer > svg {
+  width: 1rem;
+  height: 1rem;
+}

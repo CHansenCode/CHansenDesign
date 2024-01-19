@@ -2,8 +2,8 @@
   width: 100%;
 
   display: grid;
-  grid-template-columns: 3rem 3rem 1fr 3rem 3rem;
-  gap: 5%;
+  grid-template-columns: 3rem 3rem 2rem 3rem 3rem;
+  padding-top: 0.5rem;
 }
 .numberDisplay {
   width: 100%;
@@ -11,4 +11,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border-bottom: thin dashed currentColor;
 }
