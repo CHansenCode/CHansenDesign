@@ -58,7 +58,7 @@ export default function ContactPage() {
             left: "12rem",
             display: "flex",
             flexDirection: "column",
-            gap: "0.5rem",
+            gap: "1rem",
             opacity: 1,
             pointerEvents: "all",
           }}
@@ -165,6 +165,18 @@ export default function ContactPage() {
             canGoNegative={true}
             value={state.horizontalGap}
             onClick={(cb: number) => setState({ ...state, horizontalGap: cb })}
+          />
+          <Input
+            label="Dangerous index changer!!!"
+            value={state.tempIndex}
+            placeholder="Mid row value"
+            onChange={(cb: string) =>
+              setState({ ...state, tempIndex: parseInt(cb) })
+            }
+          />
+          <Button
+            text="set dangerous index"
+            onClick={() => setState({ ...state, index: state.tempIndex })}
           />
           <Button text="generateQR" onClick={() => testing()} />
           <Button text="console log state" onClick={() => console.log(state)} />
@@ -305,6 +317,7 @@ interface PDFPROPS {
 const init = {
   state: {
     index: 1,
+    tempIndex: 1,
     topRow: "PCBA no 5G",
     midRow: "3apcn",
     img: "",
