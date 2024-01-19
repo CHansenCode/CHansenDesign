@@ -1,19 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import QRCode from "react-qr-code";
 import { PDFViewer } from "@react-pdf/renderer";
 import { Page, Text, View, Document } from "@react-pdf/renderer";
 import { StyleSheet, Svg, Path, Rect } from "@react-pdf/renderer";
-import { Number } from "../components/el/Inputs";
-import { Input } from "../components/el/Inputs";
 
-import { LabelMaker } from "../feature/LabelMaker";
+import { Controller } from "./Controller";
 
-import QRCode from "react-qr-code";
-import { Button } from "../components";
+import styles from "./LabelMaker.module.css";
 
-import styles from "./dev.module.css";
-
-export default function ContactPage() {
+export function LabelMaker() {
   const [state, setState] = useState({ ...init.state });
 
   let mmVert =
@@ -53,7 +49,28 @@ export default function ContactPage() {
   return (
     <>
       <section>
-        <LabelMaker />
+        <Controller state={state} setState={setState} />
+
+        <div
+          ref={myRef}
+          style={{ opacity: 0, pointerEvents: "none" }}
+          className={styles.qrContainer}
+        >
+          {arrayBoxes.length &&
+            arrayBoxes.map((a: any, i: number) => (
+              <QRCode
+                value={`${state.midRow}${returnValues(state.index + i)}`}
+              />
+            ))}
+        </div>
+
+        <ViewPDF>
+          {arrayBoxes.length && <PDF state={state} arrBoxes={arrayBoxes} />}
+        </ViewPDF>
+
+        <img src={state.img} />
+
+        {/* <h6>{state.img}</h6> */}
       </section>
     </>
   );
