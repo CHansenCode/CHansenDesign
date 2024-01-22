@@ -1,0 +1,17 @@
+.container {
+  position: absolute;
+  z-index: -10;
+  top: -100vh;
+  left: 0;
+  height: 30rem;
+  display: flex;
+  flex-wrap: wrap;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  background: rgba(0, 255, 0, 0.3);
+
+  pointer-events: none;
+  opacity: 0;
+}

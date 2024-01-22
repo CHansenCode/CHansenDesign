@@ -1,81 +1,48 @@
 import { useState } from "react";
 
-import { Button, Text } from "../../";
+import { InputHeader } from "./InputHeader";
+
+import styles from "./Textarea.module.css";
 
 export const Textarea = ({ ...props }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [hoverInfo, setHoverInfo] = useState(false);
+
+  function onChange(e: any) {
+    e.preventDefault();
+    props.onChange(e.target.value);
+  }
+
+  const iStyle = {
+    opacity: props.disabled ? 0.5 : 1,
+    PointerEvents: props.disabled ? "none" : "all",
+  };
 
   return (
     <>
-      <div>
-        <header>
-          {props.label ? (
-            <Text text={props.label} type="label" className="sc" />
-          ) : (
-            <div />
-          )}
-
-          {props.info && (
-            <div
-              onMouseEnter={() => setHoverInfo(true)}
-              onMouseLeave={() => setHoverInfo(false)}
-            >
-              <Text
-                text={props.info}
-                type="h5"
-                style={{ pointerEvents: "none" }}
-              />
-              <Button type="info" onClick={() => null} />
-            </div>
-          )}
-        </header>
+      <div className={styles.wrapper}>
+        <InputHeader label={props.label} info={props.info} active={isFocused} />
 
         <textarea
+          className={`${styles.textarea} ${isFocused ? styles.active : ""}`}
           ref={props.myRef}
           value={props.value}
           rows={props.rows}
+          style={iStyle}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           disabled={props.disabled ? props.disabled : false}
-          onChange={props.onChange}
+          onChange={(e: any) => onChange(e)}
         ></textarea>
 
-        <span className={`pseudoborder${isFocused ? " sc" : ""}`} />
+        <span
+          className={`${styles.pseudoBorder} ${
+            isFocused ? `${styles.focused} sc` : ""
+          }`}
+        />
       </div>
 
       <style jsx>
         {`
-          div {
-            position: relative;
-            width: 100%;
-
-            border: thin solid transparent;
-          }
-
-          header {
-            height: 1rem;
-
-            display: grid;
-            grid-template-columns: 1fr auto;
-
-            border: thin dashed transparent;
-          }
-
-          textarea {
-            position: relative;
-            width: 100%;
-
-            background: transparent;
-            border: thin solid transparent;
-
-            outline: none;
-
-            font-size: 16px;
-            pointer-events: ${props.disabled && "none"};
-            opacity: ${props.disabled ? 0.5 : 1};
-          }
-
           .pseudoborder {
             position: absolute;
             top: 100%;
@@ -95,12 +62,11 @@ export const Textarea = ({ ...props }: Props) => {
 
 type Props = {
   onChange: any;
-  value: string | number | undefined;
+  value: string;
   myRef?: any;
 
   label?: string;
   info?: string;
-
   rows?: number;
 
   active?: boolean;

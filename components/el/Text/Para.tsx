@@ -1,7 +1,7 @@
 export const Para = ({ ...props }: Props) => {
   return (
     <>
-      <p>{props.text}</p>
+      <p className={props.className}>{props.text}</p>
 
       <style jsx>
         {`
@@ -18,4 +18,5 @@ export const Para = ({ ...props }: Props) => {
 type Props = {
   text: string;
   bold?: boolean;
+  className?: string;
 };

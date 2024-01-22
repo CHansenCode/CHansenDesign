@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
-import QRCode from "react-qr-code";
 import { PDFViewer } from "@react-pdf/renderer";
 import { Page, Text, View, Document } from "@react-pdf/renderer";
 import { StyleSheet, Svg, Path, Rect } from "@react-pdf/renderer";
 
 import { Controller } from "./Controller";
+import { LabelDesigner } from "./LabelDesiger";
+import { PseudoQR } from "./PseudoQR";
 
 import styles from "./LabelMaker.module.css";
 
@@ -19,58 +20,30 @@ export function LabelMaker() {
     (state.totWidth - state.marginLeft - state.marginRight) /
     state.horizontalRepeats;
 
-  let proportion = mmHori / mmVert;
+  let pageArray = Array.from(Array(state.numberOfPages), (x, i) => i + 1);
+  let labelArray = Array.from(
+    Array(state.horizontalRepeats * state.verticalRepeats),
+    (x, i) => i + 1
+  );
+
+  let props = {
+    state,
+    setState,
+    pageArray,
+    labelArray,
+  };
 
   useEffect(() => {
     setState({ ...state, init: true });
   }, []);
 
-  const myRef = useRef() as any;
-
-  let arrayBoxes = Array.from(
-    Array(state.horizontalRepeats * state.verticalRepeats),
-    (x, i) => i + 1
-  );
-
-  function testing() {
-    let paths: any = [];
-    // state.init &&
-    //   myRef.current.children.forEach((a: any, i: number) =>
-    //     paths.push(a.children[0].getAttribute("d"))
-    //   );
-
-    let arr = [...myRef.current.children];
-    arr.length > 0 &&
-      arr.forEach((a: any) => paths.push(a.children[0].getAttribute("d")));
-
-    setState({ ...state, paths: paths });
-  }
-
   return (
     <>
       <section>
-        <Controller state={state} setState={setState} />
-
-        <div
-          ref={myRef}
-          style={{ opacity: 0, pointerEvents: "none" }}
-          className={styles.qrContainer}
-        >
-          {arrayBoxes.length &&
-            arrayBoxes.map((a: any, i: number) => (
-              <QRCode
-                value={`${state.midRow}${returnValues(state.index + i)}`}
-              />
-            ))}
-        </div>
-
-        <ViewPDF>
-          {arrayBoxes.length && <PDF state={state} arrBoxes={arrayBoxes} />}
-        </ViewPDF>
-
-        <img src={state.img} />
-
-        {/* <h6>{state.img}</h6> */}
+        <Controller {...props} />
+        <LabelDesigner {...props} />
+        <PseudoQR {...props} />
+        {/* <ViewPDF>{labelArray.length && <PDF {...props} />}</ViewPDF> */}
       </section>
     </>
   );
@@ -135,22 +108,24 @@ const PDF = ({ ...props }: PDFPROPS) => {
 
   return state.init ? (
     <Document>
-      <Page size="A4" style={styles.page}>
-        {props.arrBoxes.map((a, i) => (
-          <View style={styles.section}>
-            <Svg height="80%" viewBox="0 0 21 21" style={styles.svg}>
-              <Rect x="0" y="0" height="21" width="21" fill="black" />
-              <Path fill="white" d={attr.paths[i]} />
-            </Svg>
+      {props.pageArray.map((a, i) => (
+        <Page size="A4" style={styles.page}>
+          {props.labelArray.map((a, i) => (
+            <View style={styles.section}>
+              <Svg height="80%" viewBox="0 0 21 21" style={styles.svg}>
+                <Rect x="0" y="0" height="21" width="21" fill="black" />
+                <Path fill="white" d={attr.paths[i]} />
+              </Svg>
 
-            <Text style={styles.textHeader}>{attr.topRow}</Text>
-            <Text style={styles.textBody}>{attr.midRow}</Text>
-            <Text style={styles.textNumber}>{`${returnValues(
-              attr.index + i
-            )}`}</Text>
-          </View>
-        ))}
-      </Page>
+              <Text style={styles.textHeader}>{attr.topRow}</Text>
+              <Text style={styles.textBody}>{attr.midRow}</Text>
+              <Text style={styles.textNumber}>{`${returnValues(
+                attr.index + i
+              )}`}</Text>
+            </View>
+          ))}
+        </Page>
+      ))}
     </Document>
   ) : (
     <>loading...</>
@@ -180,16 +155,41 @@ const ViewPDF = (props: any) => {
 
 interface PDFPROPS {
   state?: any;
-  arrBoxes: number[];
+  setState: any;
+  pageArray: number[];
+  labelArray: number[];
 }
 
 const init = {
   state: {
+    labelDesigner: {
+      elements: [
+        {
+          type: "text",
+          top: 0,
+          left: 0,
+          width: 50,
+          height: 50,
+          body: "empty",
+          value: 0,
+        },
+        {
+          type: "qr",
+          top: 0,
+          left: 0,
+          width: 50,
+          height: 50,
+          body: "empty",
+          value: 0,
+        },
+      ],
+    },
     index: 1,
     tempIndex: 1,
     topRow: "PCBA no 5G",
     midRow: "3apcn",
     img: "",
+    numberOfPages: 1,
     horizontalRepeats: 7,
     verticalRepeats: 27,
     marginTop: 8,
@@ -205,6 +205,7 @@ const init = {
     images: [],
     paths: [],
     init: false,
+    initQR: false,
   },
 };
 

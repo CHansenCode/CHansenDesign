@@ -1,0 +1,27 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.optionsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.option {
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  padding: 0.25rem 0.5rem;
+
+  border: thin solid currentColor;
+  border-radius: 0.25rem;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+.activeOption {
+  box-shadow: 0 0 1rem 0 currentColor;
+}

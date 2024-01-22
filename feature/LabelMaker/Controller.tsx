@@ -1,6 +1,6 @@
 import { Number } from "../../components/el/Inputs";
 import { Input } from "../../components/el/Inputs";
-import { Button } from "../../components";
+import { Button, Text } from "../../components";
 
 import styles from "./Controller.module.css";
 
@@ -9,6 +9,7 @@ export function Controller({ ...props }: PropTypes) {
 
   return (
     <div className={styles.container}>
+      <Text type="h3" text="Controller" />
       <Number
         label="Starting Index"
         increment={1}

@@ -1,78 +1,55 @@
 import { Text } from "../Text";
 import { Button } from "../Button";
 
+import { InputHeader } from "./InputHeader";
+
 import { useState } from "react";
 
+import styles from "./Select.module.css";
+
 export const Select = ({ ...props }: Props) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const [hoverInfo, setHoverInfo] = useState(false);
-
   return (
-    <>
-      <div>
-        <header>
-          {props.label ? (
-            <Text text={props.label} type="label" className="sc" />
-          ) : (
-            <div />
-          )}
+    <div className={styles.wrapper}>
+      <InputHeader label={props.label} info={props.info} />
 
-          {props.info && (
-            <div
-              onMouseEnter={() => setHoverInfo(true)}
-              onMouseLeave={() => setHoverInfo(false)}
-            >
-              <Text
-                text={props.info}
-                type="h5"
-                style={{ pointerEvents: "none" }}
-              />
-              <Button type="info" onClick={() => null} />
-            </div>
-          )}
-        </header>
-      </div>
-
-      <aside>{props.children}</aside>
-
-      <style jsx>
-        {`
-          div {
-            position: relative;
-            width: 100%;
-
-            border: thin solid transparent;
-          }
-
-          header {
-            height: 1rem;
-
-            display: grid;
-            grid-template-columns: 1fr auto;
-
-            border: thin dashed transparent;
-          }
-        `}
-      </style>
-    </>
+      <ul className={styles.optionsWrapper}>
+        {props.values.length ? (
+          props.values.map((a, i) => (
+            <Option
+              value={a}
+              onClick={() => props.onClick(a)}
+              active={props.value === a}
+            />
+          ))
+        ) : (
+          <>no values provided</>
+        )}
+      </ul>
+    </div>
   );
 };
 
 type Props = {
-  onChange: any;
   myRef?: any;
   value?: number;
 
   label?: string;
   info?: string;
-  type?: string;
 
-  increment: number;
-  largeIncrement?: number;
-  allowZero?: boolean;
-
-  children?: any;
+  values: any[];
+  onClick: any;
 
   active?: boolean;
   disabled?: boolean;
+};
+
+const Option = ({ ...props }) => {
+  return (
+    <div
+      className={`${styles.option} ${props.active ? "sc" : ""}`}
+      onClick={() => props.onClick()}
+    >
+      {props.value}
+    </div>
+  );
 };
