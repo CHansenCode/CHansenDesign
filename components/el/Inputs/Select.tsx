@@ -16,6 +16,7 @@ export const Select = ({ ...props }: Props) => {
         {props.values.length ? (
           props.values.map((a, i) => (
             <Option
+              key={`${i}${a}selOpt`}
               value={a}
               onClick={() => props.onClick(a)}
               active={props.value === a}

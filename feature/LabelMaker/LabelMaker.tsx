@@ -13,24 +13,35 @@ import styles from "./LabelMaker.module.css";
 export function LabelMaker() {
   const [state, setState] = useState({ ...init.state });
 
-  let mmVert =
-    (state.totHeight - state.marginTop - state.marginBottom) /
-    state.verticalRepeats;
-  let mmHori =
-    (state.totWidth - state.marginLeft - state.marginRight) /
-    state.horizontalRepeats;
-
   let pageArray = Array.from(Array(state.numberOfPages), (x, i) => i + 1);
   let labelArray = Array.from(
     Array(state.horizontalRepeats * state.verticalRepeats),
     (x, i) => i + 1
   );
 
+  let statistics = {
+    labelHeight: (
+      (state.totHeight - state.marginTop - state.marginBottom) /
+      state.verticalRepeats
+    ).toFixed(1),
+    labelWidth: (
+      (state.totWidth - state.marginLeft - state.marginRight) /
+      state.horizontalRepeats
+    ).toFixed(),
+    proportion: (
+      (state.totHeight - state.marginTop - state.marginBottom) /
+      state.verticalRepeats /
+      ((state.totWidth - state.marginLeft - state.marginRight) /
+        state.horizontalRepeats)
+    ).toFixed(1),
+  };
+
   let props = {
     state,
     setState,
     pageArray,
     labelArray,
+    statistics,
   };
 
   useEffect(() => {
@@ -39,10 +50,10 @@ export function LabelMaker() {
 
   return (
     <>
-      <section>
-        <Controller {...props} />
+      <section onClick={() => console.log(statistics)}>
+        {/* <Controller {...props} /> */}
         <LabelDesigner {...props} />
-        <PseudoQR {...props} />
+        {/* <PseudoQR {...props} /> */}
         {/* <ViewPDF>{labelArray.length && <PDF {...props} />}</ViewPDF> */}
       </section>
     </>
@@ -165,22 +176,48 @@ const init = {
     labelDesigner: {
       elements: [
         {
+          title: "",
           type: "text",
-          top: 0,
-          left: 0,
+          top: 10,
+          left: 45,
           width: 50,
           height: 50,
-          body: "empty",
+          body: "",
           value: 0,
+          fontSize: 20,
         },
         {
-          type: "qr",
-          top: 0,
-          left: 0,
+          title: "",
+          type: "text",
+          top: 40,
+          left: 45,
           width: 50,
           height: 50,
-          body: "empty",
+          body: "",
           value: 0,
+          fontSize: 20,
+        },
+        {
+          title: "",
+          type: "text",
+          top: 70,
+          left: 45,
+          width: 20,
+          height: 10,
+          body: "",
+          value: 0,
+          fontSize: 20,
+        },
+        {
+          title: "",
+          type: "qr",
+          top: 10,
+          left: 5,
+          width: 80,
+          height: 80,
+          body: "",
+          value: 0,
+          fontSize: 20,
         },
       ],
     },
